@@ -1,0 +1,6 @@
+framework module Pods_New_Radio_App {
+  umbrella header "Pods-New Radio App-umbrella.h"
+
+  export *
+  module * { export * }
+}
