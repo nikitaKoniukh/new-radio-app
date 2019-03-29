@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AVKit
 
 class PodcastViewController: UITableViewController {
     
@@ -52,14 +53,16 @@ class PodcastViewController: UITableViewController {
         
         return cell
     }
+
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let podcast = self.podcasts[indexPath.row]
-        let playerButton = PlayerDetaislView()
-        
+      //  let playerButton = PlayerDetaislView()
+
         let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
-       
+
         mainTabController?.maximizePlayerDetails(podcast: podcast)
+        mainTabController?.minimizePlayerDetails()
         
     }
     

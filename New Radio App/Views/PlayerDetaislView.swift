@@ -83,7 +83,7 @@ class PlayerDetaislView: UIView {
     
     let player: AVPlayer = {
         let avPlayer = AVPlayer()
-        avPlayer.automaticallyWaitsToMinimizeStalling = false
+        avPlayer.automaticallyWaitsToMinimizeStalling = true
         return avPlayer
     }()
     

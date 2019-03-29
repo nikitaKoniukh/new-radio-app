@@ -12,6 +12,9 @@
 		CA1CB81D224D7032002FFD54 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1CB81B224D7032002FFD54 /* ChatViewController.xib */; };
 		CA1CB820224D70AF002FFD54 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CB81E224D70AF002FFD54 /* ProfileViewController.swift */; };
 		CA1CB821224D70AF002FFD54 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1CB81F224D70AF002FFD54 /* ProfileViewController.xib */; };
+		CA1CB823224DFBD3002FFD54 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CB822224DFBD3002FFD54 /* APIService.swift */; };
+		CA1CB825224DFBD9002FFD54 /* JsonParsingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CB824224DFBD9002FFD54 /* JsonParsingModels.swift */; };
+		CA1CB827224DFBE3002FFD54 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CB826224DFBE2002FFD54 /* Podcast.swift */; };
 		CA51EF2A2245872F0061D0EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51EF292245872F0061D0EA /* AppDelegate.swift */; };
 		CA51EF2C2245872F0061D0EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51EF2B2245872F0061D0EA /* ViewController.swift */; };
 		CA51EF2F2245872F0061D0EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA51EF2D2245872F0061D0EA /* Main.storyboard */; };
@@ -19,9 +22,7 @@
 		CA51EF342245872F0061D0EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA51EF322245872F0061D0EA /* LaunchScreen.storyboard */; };
 		CA51EF3C2247645D0061D0EA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51EF3B2247645D0061D0EA /* MainTabBarController.swift */; };
 		CA51EF3F22476AD10061D0EA /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51EF3E22476AD10061D0EA /* PodcastViewController.swift */; };
-		CA51EF4222476B4B0061D0EA /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51EF4122476B4B0061D0EA /* Podcast.swift */; };
 		CA51EF4422476EDE0061D0EA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51EF4322476EDE0061D0EA /* SearchViewController.swift */; };
-		CA51EF47224782D40061D0EA /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51EF46224782D40061D0EA /* APIService.swift */; };
 		CA51EF4A224787560061D0EA /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA51EF49224787560061D0EA /* PodcastCell.xib */; };
 		CA51EF50224788580061D0EA /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51EF4F224788580061D0EA /* PodcastCell.swift */; };
 		CA51EF52224796490061D0EA /* PlayerDetaislView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA51EF51224796490061D0EA /* PlayerDetaislView.xib */; };
@@ -41,6 +42,9 @@
 		CA1CB81B224D7032002FFD54 /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
 		CA1CB81E224D70AF002FFD54 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CA1CB81F224D70AF002FFD54 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		CA1CB822224DFBD3002FFD54 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		CA1CB824224DFBD9002FFD54 /* JsonParsingModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParsingModels.swift; sourceTree = "<group>"; };
+		CA1CB826224DFBE2002FFD54 /* Podcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		CA51EF262245872F0061D0EA /* New Radio App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Radio App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA51EF292245872F0061D0EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA51EF2B2245872F0061D0EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,9 +54,7 @@
 		CA51EF352245872F0061D0EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA51EF3B2247645D0061D0EA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		CA51EF3E22476AD10061D0EA /* PodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewController.swift; sourceTree = "<group>"; };
-		CA51EF4122476B4B0061D0EA /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		CA51EF4322476EDE0061D0EA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		CA51EF46224782D40061D0EA /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		CA51EF49224787560061D0EA /* PodcastCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastCell.xib; sourceTree = "<group>"; };
 		CA51EF4F224788580061D0EA /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		CA51EF51224796490061D0EA /* PlayerDetaislView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetaislView.xib; sourceTree = "<group>"; };
@@ -147,7 +149,8 @@
 		CA51EF4022476B2C0061D0EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CA51EF4122476B4B0061D0EA /* Podcast.swift */,
+				CA1CB826224DFBE2002FFD54 /* Podcast.swift */,
+				CA1CB824224DFBD9002FFD54 /* JsonParsingModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -155,7 +158,7 @@
 		CA51EF45224782A90061D0EA /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				CA51EF46224782D40061D0EA /* APIService.swift */,
+				CA1CB822224DFBD3002FFD54 /* APIService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -320,12 +323,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA1CB823224DFBD3002FFD54 /* APIService.swift in Sources */,
 				CA51EF5F2248E67D0061D0EA /* FavoritesController.swift in Sources */,
 				CA51EF5D224820930061D0EA /* UIApplication.swift in Sources */,
 				CA1CB81C224D7032002FFD54 /* ChatViewController.swift in Sources */,
 				CA1CB820224D70AF002FFD54 /* ProfileViewController.swift in Sources */,
 				CA51EF4422476EDE0061D0EA /* SearchViewController.swift in Sources */,
-				CA51EF47224782D40061D0EA /* APIService.swift in Sources */,
 				CA51EF612248EE000061D0EA /* FavoritePodcastCell.swift in Sources */,
 				CA51EF56224799680061D0EA /* PlayerDetaislView.swift in Sources */,
 				CA51EF50224788580061D0EA /* PodcastCell.swift in Sources */,
@@ -334,9 +337,10 @@
 				CA51EF5B224818610061D0EA /* PlayerDetailsView+Gesture.swift in Sources */,
 				CA51EF3C2247645D0061D0EA /* MainTabBarController.swift in Sources */,
 				CA51EFF5224A851E0061D0EA /* UserDefaults.swift in Sources */,
+				CA1CB827224DFBE3002FFD54 /* Podcast.swift in Sources */,
+				CA1CB825224DFBD9002FFD54 /* JsonParsingModels.swift in Sources */,
 				CA51EF3F22476AD10061D0EA /* PodcastViewController.swift in Sources */,
 				CA51EF592247B3720061D0EA /* CMTime.swift in Sources */,
-				CA51EF4222476B4B0061D0EA /* Podcast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

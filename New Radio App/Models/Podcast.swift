@@ -22,6 +22,33 @@ class Podcast: NSObject, Decodable, NSCoding {
         
     }
     
+    init(name : String,description: String,url : String) {
+        self.name = name
+        self.myDescription = description
+        self.urlAddress = url
+    }
+    
+    static func from(cloudantPodcastDocument doc : CloudantRowPodcastDoc) -> Podcast{
+        let name = doc.name
+        let desc = doc.podcastDescription
+        let url = doc.url
+        
+        return Podcast(name: name, description: desc, url: url)
+    }
+    
+    static func from(cloudantGenericDocument doc : CloudantGenericDoc) -> Podcast? {
+        if doc.type != "podcast" {
+            print("wrong doc type")
+            return nil;
+        }
+        
+        let name = doc.name!
+        let desc = doc.podcastDescription!
+        let url = doc.url!
+        
+        return Podcast(name: name, description: desc, url: url)
+    }
+    
     var name: String?
     var myDescription: String?
     var urlAddress: String?
