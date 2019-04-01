@@ -33,30 +33,11 @@ class PlayerDetaislView: UIView {
             UserDefaults.standard.set(data, forKey: UserDefaults.favoritePodcastKey)
             showBadgeHighlight()
         }
-        
-        
     }
     
     fileprivate func showBadgeHighlight(){
         UIApplication.mainTabController()?.viewControllers?[0].tabBarItem.badgeValue = "חדש"
     }
-    
-    
-    @IBAction func fetchButtonPressed(_ sender: UIButton) {
-//        let value = UserDefaults.standard.value(forKey: UserDefaults.favoritePodcastKey) as? String
-//        print(value ?? "")
-//        guard let data = UserDefaults.standard.data(forKey: UserDefaults.favoritePodcastKey) else {return}
-//
-//            let savedPodcasts = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Podcast]
-//
-//            savedPodcasts?.forEach({ (p) in
-//                print(p.name ?? "")
-//            })
-    }
-    
-    
-    
-    
     
     var podcast: Podcast!{
         didSet{
@@ -65,8 +46,9 @@ class PlayerDetaislView: UIView {
             setUpNowPlayingInfo()
             setupAudioSession()
             playPodcast()
+            print("Player", podcast.urlAddress)
             
-            //CHAECK IMAGE
+            //CHECK IMAGE
             
 //            var nowPlayingInfo =
 //                MPNowPlayingInfoCenter.default().nowPlayingInfo
@@ -89,9 +71,14 @@ class PlayerDetaislView: UIView {
     
 
     
-    fileprivate func playPodcast(){
-        guard let url = URL(string: podcast.urlAddress ?? "") else {return}
+    fileprivate func playPodcast(){        
+        let urlD = podcast.urlAddress
+        
+        let urlHebrew = urlD!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        guard let url = URL(string: urlHebrew ?? "") else {return}
+
         let playerItem = AVPlayerItem(url: url)
+        
         player.replaceCurrentItem(with: playerItem)
         player.play()
     }
@@ -146,7 +133,9 @@ class PlayerDetaislView: UIView {
         setupGestures()
         observePlayerCurrentTime()
         observeBoundaryTime()
-      //  setupInterruptionObserver()
+        setupInterruptionObserver()
+        
+        
     }
     
 
@@ -155,18 +144,52 @@ class PlayerDetaislView: UIView {
         return Bundle.main.loadNibNamed("PlayerDetaislView", owner: self, options: nil)?.first as! PlayerDetaislView
     }
     
-//    fileprivate func setupInterruptionObserver(){
-//        let notificationCenter = NotificationCenter.default
-//
-//        notificationCenter.addObserver(self,
-//                                       selector: #selector(handleInterruption),
-//                                       name: .AVAudioSession.interruptionNotification,
-//                                       object: nil)
-//    }
-//
-//    @objc fileprivate func handleInterruption(notification: Notification) {
-//        //https://developer.apple.com/documentation/avfoundation/avaudiosession/responding_to_audio_session_interruptions
-//    }
+    fileprivate func setupInterruptionObserver(){
+        let notificationCenter = NotificationCenter.default
+        let session = AVAudioSession.sharedInstance()
+        
+        
+
+        notificationCenter.addObserver(self,
+                                       selector: #selector(handleInterruption),
+                                       name: AVAudioSession.interruptionNotification,
+                                       object: nil)
+    }
+
+    @objc fileprivate func handleInterruption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+                return
+        }
+        if type.rawValue == AVAudioSession.InterruptionType.began.rawValue {
+            print("Interruption began")
+            
+            playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
+            miniPlayPauseButton.setImage(UIImage(named: "pause"), for: .normal)
+            
+        } else {
+            print("Interruption ended...")
+            
+            guard let options = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+            
+            if options == AVAudioSession.InterruptionOptions.shouldResume.rawValue {
+                player.play()
+                playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+                miniPlayPauseButton.setImage(UIImage(named: "play"), for: .normal)
+            }
+            
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     fileprivate func setupAudioSession(){
         

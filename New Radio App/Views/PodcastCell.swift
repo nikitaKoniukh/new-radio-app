@@ -11,16 +11,19 @@ import UIKit
 class PodcastCell: UITableViewCell {
 
     //Outlets
+    @IBOutlet weak var viewCell: UIView!
+    @IBOutlet weak var infoButton: UIButton!
     
     @IBOutlet weak var podcastImage: UIImageView!
     @IBOutlet weak var trackNameLabel: UILabel!
-    @IBOutlet weak var trackDescriptionLabel: UILabel!
     
-    var podcast: Podcast!{
+    var podcast: Podcast?{
         didSet{
-            trackNameLabel.text = podcast.name
-            trackDescriptionLabel.text = podcast.myDescription
+            trackNameLabel.text = podcast?.name
         }
     }
-
+    
+    @IBAction func infoButtonPressed(_ sender: UIButton) {
+        
+    }
 }

@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         window?.rootViewController = MainTabBarController()
+        
+      setupAudioSession()
+
         return true
     }
 
@@ -48,3 +51,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+import AVKit
+extension AppDelegate{
+    func setupAudioSession(){
+        let session = AVAudioSession.sharedInstance()
+        do {
+            //set audiosession
+            try session.setCategory(.playAndRecord, mode: .default)
+            //activate the sesison
+            try session.setActive(true)
+        }catch let err{
+            print(err)
+        }
+    }
+    
+  
+}

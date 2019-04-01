@@ -22,16 +22,16 @@ class MainTabBarController: UITabBarController{
     //MARK:- Helper Function
     
   fileprivate  func setupViewControllers(){
-    
-    let layout = UICollectionViewFlowLayout()
-    let favoritesController = FavoritesController(collectionViewLayout: layout)
+//    
+//    let layout = UICollectionViewFlowLayout()
+//    let favoritesController = FavoritesController(collectionViewLayout: layout)
     
         viewControllers = [
-            generateNavController(with: favoritesController, title: "מועדפים", image: UIImage(named: "like")!),
             generateNavController(with: PodcastViewController(), title: "פודקאסטים", image: UIImage(named: "playlist")!),
-            generateNavController(with: SearchViewController(), title: "חיפוש", image: UIImage(named: "search")!),
-            generateNavController(with: ViewController(), title: "התגים שלי", image: UIImage(named: "hashtag")!),
-            generateNavController(with: ChatViewController(), title: "המשובים שלי", image: UIImage(named: "chat")!)
+            generateNavController(with: FavoritesController(), title: "מועדפים", image: UIImage(named: "like")!),
+//            generateNavController(with: ViewController(), title: "חיפוש", image: UIImage(named: "search")!),
+//            generateNavController(with: ViewController(), title: "התגים שלי", image: UIImage(named: "hashtag")!),
+            generateNavController(with: ChatListViewController(), title: "המשובים שלי", image: UIImage(named: "chat")!)
         ]
     }
     
@@ -59,11 +59,12 @@ class MainTabBarController: UITabBarController{
     @objc func profileBtn(){
                 let profileViewController = ProfileViewController()
 
-                navigationController?.pushViewController(profileViewController, animated: true)
-                print("yes")
+               navigationController?.pushViewController(profileViewController, animated: true)
         
 
     }
+    
+    
     
     let playerDetailsView = PlayerDetaislView.initFromNib()
     var maximizedTopAnchorConstraint: NSLayoutConstraint!
@@ -72,6 +73,7 @@ class MainTabBarController: UITabBarController{
     
     fileprivate func setupPlayerDetailViiew(){
         print("Setting up PlayerDetailsView")
+        
         
         // use auto layout
         //        view.addSubview(playerDetailsView)
@@ -118,6 +120,7 @@ class MainTabBarController: UITabBarController{
         if podcast != nil{
             playerDetailsView.podcast = podcast
             
+            print("maximizePlayerDetails(MainTabBarController)", podcast?.urlAddress)
         }
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {

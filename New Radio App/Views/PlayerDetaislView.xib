@@ -101,9 +101,6 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTM-lc-LBE">
                                     <rect key="frame" x="109" y="0.0" width="109" height="40"/>
                                     <state key="normal" image="share"/>
-                                    <connections>
-                                        <action selector="fetchButtonPressed:" destination="z1k-bz-Imh" eventType="touchUpInside" id="IoE-Bk-VdY"/>
-                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqA-b7-qbe">
                                     <rect key="frame" x="218" y="0.0" width="109" height="40"/>

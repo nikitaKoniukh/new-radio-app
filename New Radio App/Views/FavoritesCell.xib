@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" id="IgG-Lk-K9h" customClass="FavoritesCell" customModule="New_Radio_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IgG-Lk-K9h" id="xHx-CU-w63">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqv-bO-JRY">
+                        <rect key="frame" x="20" y="10" width="335" height="109.5"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pod" translatesAutoresizingMaskIntoConstraints="NO" id="RNA-3j-QMR">
+                                <rect key="frame" x="0.0" y="0.0" width="335" height="109.5"/>
+                            </imageView>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDE-ks-Zmf">
+                                <rect key="frame" x="0.0" y="63.5" width="335" height="36"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.3024935788" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-hearts2" translatesAutoresizingMaskIntoConstraints="NO" id="Q1O-B0-xAZ">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="tgq-Cl-akS"/>
+                                    <constraint firstAttribute="height" constant="50" id="x7x-j4-u5g"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RNA-3j-QMR" firstAttribute="leading" secondItem="aqv-bO-JRY" secondAttribute="leading" id="02C-S1-W2E"/>
+                            <constraint firstItem="eDE-ks-Zmf" firstAttribute="leading" secondItem="aqv-bO-JRY" secondAttribute="leading" id="4O4-dx-xHp"/>
+                            <constraint firstAttribute="bottom" secondItem="eDE-ks-Zmf" secondAttribute="bottom" constant="10" id="9VL-1l-DHX"/>
+                            <constraint firstItem="Q1O-B0-xAZ" firstAttribute="leading" secondItem="aqv-bO-JRY" secondAttribute="leading" id="DbC-R2-gdV"/>
+                            <constraint firstItem="Q1O-B0-xAZ" firstAttribute="top" secondItem="aqv-bO-JRY" secondAttribute="top" id="DzH-OZ-5NT"/>
+                            <constraint firstAttribute="bottom" secondItem="RNA-3j-QMR" secondAttribute="bottom" id="Oip-xu-moe"/>
+                            <constraint firstItem="RNA-3j-QMR" firstAttribute="top" secondItem="aqv-bO-JRY" secondAttribute="top" id="ZzD-uZ-I76"/>
+                            <constraint firstAttribute="trailing" secondItem="RNA-3j-QMR" secondAttribute="trailing" id="iXm-rN-8jl"/>
+                            <constraint firstAttribute="trailing" secondItem="eDE-ks-Zmf" secondAttribute="trailing" id="xfC-Rl-kmi"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aqv-bO-JRY" firstAttribute="top" secondItem="xHx-CU-w63" secondAttribute="top" constant="10" id="9Lg-DR-x1t"/>
+                    <constraint firstItem="aqv-bO-JRY" firstAttribute="leading" secondItem="xHx-CU-w63" secondAttribute="leading" constant="20" id="FsX-Xx-zeO"/>
+                    <constraint firstAttribute="bottom" secondItem="aqv-bO-JRY" secondAttribute="bottom" constant="10" id="eUa-cQ-LjK"/>
+                    <constraint firstAttribute="trailing" secondItem="aqv-bO-JRY" secondAttribute="trailing" constant="20" id="wkX-NI-JD1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="favoritesNameLabel" destination="eDE-ks-Zmf" id="M2x-RX-eOf"/>
+                <outlet property="podcastImage" destination="RNA-3j-QMR" id="OHY-uJ-6PB"/>
+                <outlet property="viewCell" destination="aqv-bO-JRY" id="2Cz-cP-uQf"/>
+            </connections>
+            <point key="canvasLocation" x="285.60000000000002" y="147.52623688155924"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icons8-hearts2" width="100" height="100"/>
+        <image name="pod" width="348" height="145"/>
+    </resources>
+</document>

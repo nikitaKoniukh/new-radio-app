@@ -11,53 +11,70 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0lC-Pu-Vv1" customClass="PodcastCell" customModule="New_Radio_App" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" id="0lC-Pu-Vv1" customClass="PodcastCell" customModule="New_Radio_App" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0lC-Pu-Vv1" id="fHF-B2-BDr">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pod" translatesAutoresizingMaskIntoConstraints="NO" id="7MT-vG-Zpu">
-                        <rect key="frame" x="10" y="5" width="355" height="119.5"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVr-aM-Puz">
-                        <rect key="frame" x="10" y="5" width="355" height="36"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.3024935788" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svw-ae-OQK">
-                        <rect key="frame" x="10" y="104" width="355" height="20.5"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-ai-FoQ">
+                        <rect key="frame" x="20" y="10" width="335" height="109.5"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pod" translatesAutoresizingMaskIntoConstraints="NO" id="7MT-vG-Zpu">
+                                <rect key="frame" x="0.0" y="0.0" width="335" height="109.5"/>
+                            </imageView>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVr-aM-Puz">
+                                <rect key="frame" x="0.0" y="63.5" width="335" height="36"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.3024935788" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Yr-Rk-PBh">
+                                <rect key="frame" x="295" y="0.0" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="DwY-Uw-l10"/>
+                                    <constraint firstAttribute="height" constant="40" id="gVn-5P-cMB"/>
+                                </constraints>
+                                <state key="normal" image="icons8-info"/>
+                                <connections>
+                                    <action selector="infoButtonPressed:" destination="0lC-Pu-Vv1" eventType="touchUpInside" id="9TC-RY-AoL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="VVr-aM-Puz" secondAttribute="trailing" id="2CN-Rx-FWg"/>
+                            <constraint firstItem="7MT-vG-Zpu" firstAttribute="leading" secondItem="nhU-ai-FoQ" secondAttribute="leading" id="7Tg-YX-Jrv"/>
+                            <constraint firstAttribute="trailing" secondItem="7Yr-Rk-PBh" secondAttribute="trailing" id="87L-Va-tNP"/>
+                            <constraint firstItem="VVr-aM-Puz" firstAttribute="leading" secondItem="nhU-ai-FoQ" secondAttribute="leading" id="FtJ-yD-sSD"/>
+                            <constraint firstAttribute="bottom" secondItem="7MT-vG-Zpu" secondAttribute="bottom" id="Kxx-Yh-Deu"/>
+                            <constraint firstItem="7MT-vG-Zpu" firstAttribute="top" secondItem="nhU-ai-FoQ" secondAttribute="top" id="emD-8c-kMs"/>
+                            <constraint firstItem="7Yr-Rk-PBh" firstAttribute="top" secondItem="nhU-ai-FoQ" secondAttribute="top" id="jZW-9Q-NgU"/>
+                            <constraint firstAttribute="bottom" secondItem="VVr-aM-Puz" secondAttribute="bottom" constant="10" id="lV1-lU-x0Q"/>
+                            <constraint firstAttribute="trailing" secondItem="7MT-vG-Zpu" secondAttribute="trailing" id="tdH-gN-6vL"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="7MT-vG-Zpu" firstAttribute="top" secondItem="fHF-B2-BDr" secondAttribute="top" constant="5" id="ClD-NV-JP3"/>
-                    <constraint firstItem="VVr-aM-Puz" firstAttribute="leading" secondItem="fHF-B2-BDr" secondAttribute="leading" constant="10" id="G5O-ss-Qyp"/>
-                    <constraint firstAttribute="trailing" secondItem="Svw-ae-OQK" secondAttribute="trailing" constant="10" id="h5o-3c-ffH"/>
-                    <constraint firstAttribute="trailing" secondItem="7MT-vG-Zpu" secondAttribute="trailing" constant="10" id="nJr-Mx-MRr"/>
-                    <constraint firstAttribute="bottom" secondItem="Svw-ae-OQK" secondAttribute="bottom" constant="5" id="osW-vc-H3G"/>
-                    <constraint firstItem="7MT-vG-Zpu" firstAttribute="leading" secondItem="fHF-B2-BDr" secondAttribute="leading" constant="10" id="s2K-rW-fEj"/>
-                    <constraint firstItem="Svw-ae-OQK" firstAttribute="leading" secondItem="fHF-B2-BDr" secondAttribute="leading" constant="10" id="vYf-9C-Ney"/>
-                    <constraint firstItem="VVr-aM-Puz" firstAttribute="top" secondItem="fHF-B2-BDr" secondAttribute="top" constant="5" id="yEm-5q-Cbg"/>
-                    <constraint firstAttribute="trailing" secondItem="VVr-aM-Puz" secondAttribute="trailing" constant="10" id="yqT-N6-l76"/>
-                    <constraint firstAttribute="bottom" secondItem="7MT-vG-Zpu" secondAttribute="bottom" constant="5" id="zZ6-5W-760"/>
+                    <constraint firstItem="nhU-ai-FoQ" firstAttribute="leading" secondItem="fHF-B2-BDr" secondAttribute="leading" constant="20" id="6jJ-DN-7TM"/>
+                    <constraint firstItem="nhU-ai-FoQ" firstAttribute="top" secondItem="fHF-B2-BDr" secondAttribute="top" constant="10" id="VMr-lc-5zk"/>
+                    <constraint firstAttribute="trailing" secondItem="nhU-ai-FoQ" secondAttribute="trailing" constant="20" id="XwO-fR-TOv"/>
+                    <constraint firstAttribute="bottom" secondItem="nhU-ai-FoQ" secondAttribute="bottom" constant="10" id="kft-7j-G7W"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="infoButton" destination="7Yr-Rk-PBh" id="soy-kX-9bR"/>
                 <outlet property="podcastImage" destination="7MT-vG-Zpu" id="i4L-RC-BNI"/>
-                <outlet property="trackDescriptionLabel" destination="Svw-ae-OQK" id="B1Q-Y8-lHp"/>
                 <outlet property="trackNameLabel" destination="VVr-aM-Puz" id="cuc-gF-ZXD"/>
+                <outlet property="viewCell" destination="nhU-ai-FoQ" id="HJO-9Y-Plj"/>
             </connections>
             <point key="canvasLocation" x="154.40000000000001" y="165.51724137931035"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="icons8-info" width="100" height="100"/>
         <image name="pod" width="348" height="145"/>
     </resources>
 </document>

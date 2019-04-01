@@ -10,22 +10,114 @@ import UIKit
 import Alamofire
 import AVKit
 
-class PodcastViewController: UITableViewController {
+class PodcastViewController: UITableViewController, UISearchBarDelegate {
     
     var podcasts = [Podcast]()
     let celId = "cellId"
+    let searchController = UISearchController(searchResultsController: nil)
+    var podcastsMain = [Podcast]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupTableView()
         
-            APIService.shared.fetchPodcast { (podcasts) in
+        setupTableView()
+        setupSearchBar()
+        
+        APIService.shared.fetchPodcast { (podcasts) in
             self.podcasts = podcasts
+            self.podcastsMain = podcasts
             self.tableView.reloadData()
         }
         
-      
+        
+        
+        //removing separators
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+    }
+
+    
+    fileprivate func buildPodcasts(podcastresults: [Podcast]) {
+        self.podcasts = podcastresults
+        self.tableView.reloadData()
+    
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let podcastsResults = searchPodcasts(index: searchBar.selectedScopeButtonIndex, searchText: searchText)
+       
+        buildPodcasts(podcastresults: podcastsResults)
+        
+    }
+    
+    enum selectedScope: Int {
+        case participants = 0
+        case description = 1
+        case name = 2
+        case all = 3
+    }
+    
+    func searchPodcasts(index: Int, searchText: String)->[Podcast]{
+       var podcastSearchArray: [Podcast] = []
+        
+        switch index{
+        case selectedScope.name.rawValue:
+            for podcast in podcastsMain{
+                let myName = podcast.name
+                if (myName?.contains(searchText))!{
+                    podcastSearchArray.append(podcast)
+                }
+            }
+        case selectedScope.description.rawValue:
+            for podcast in podcastsMain{
+                let myDescription = podcast.myDescription
+                if (myDescription?.contains(searchText))!{
+                    podcastSearchArray.append(podcast)
+                }
+            }
+        case selectedScope.participants.rawValue:
+            for podcast in podcastsMain{
+                let myBroadcasters = podcast.broadcasters
+                if (myBroadcasters?.contains(searchText))!{
+                    podcastSearchArray.append(podcast)
+                }
+            }
+        case selectedScope.all.rawValue:
+            for podcast in podcastsMain{
+                let myName = podcast.name
+                let myDescription = podcast.myDescription
+                let myBroadcasters = podcast.broadcasters
+                let myparticipants = podcast.participants
+                
+                if (myName?.contains(searchText))!{
+                    podcastSearchArray.append(podcast)
+                } else if (myDescription?.contains(searchText))!{
+                    podcastSearchArray.append(podcast)
+                }else if (myBroadcasters?.contains(searchText))!{
+                    podcastSearchArray.append(podcast)
+                }else if (myparticipants?.contains(searchText))!{
+                    podcastSearchArray.append(podcast)
+                }
+            }
+     
+        default:
+            print("no type")
+        }
+        return podcastSearchArray
+    }
+    
+    fileprivate func setupSearchBar(){
+        self.definesPresentationContext = true
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.scopeButtonTitles = ["משתתפים","תיאור", "שם תוכנית", "הכל"]
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        
+        
     }
     
     
@@ -38,37 +130,84 @@ class PodcastViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return podcasts.count
+        
+        if searchController.isActive == true && searchController.searchBar.text != ""{
+            return podcasts.count
+        }
+        podcasts = podcastsMain
+        return podcastsMain.count
+        
     }
+    
+  
+    
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: celId, for: indexPath) as! PodcastCell
+       
+        cell.viewCell.layer.borderWidth = 0.5
+        cell.viewCell.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        cell.podcastImage.layer.cornerRadius = 10
         
         let podcast = podcasts[indexPath.row]
         cell.podcast = podcast
-//
-//        cell.textLabel?.text = "\(podcast.name ?? "")\n\(podcast.description ?? "")"
-//        cell.textLabel?.numberOfLines = -1
-//        //cell.imageView?.image = UIImage(named: "pod")
+        
+        cell.infoButton.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        cell.infoButton.layer.cornerRadius = 20
+        cell.infoButton.layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        cell.infoButton.tag = indexPath.row
+        cell.infoButton.addTarget(self, action: #selector(pushInfoButton), for: .touchUpInside)
+        
+        // Make it card-like
+         cell.viewCell.layer.cornerRadius = 10
+         cell.viewCell.layer.shadowOpacity = 1
+         cell.viewCell.layer.shadowRadius = 5
+         cell.viewCell.layer.shadowColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
+         cell.viewCell.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         return cell
+    }
+    
+    @objc func pushInfoButton(_ sender: UIButton){
+       let buttonTag = sender.tag
+        print("my tag: ", buttonTag)
+        let infoViewController = InfoPodcastViewController()
+        
+        let podcast = podcasts[buttonTag]
+        print("The name is... ", podcast.name!)
+        
+         infoViewController.info = podcast
+        
+        navigationController?.pushViewController(infoViewController, animated: true)
+        
+       
+
     }
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+        
+        
         let podcast = self.podcasts[indexPath.row]
-      //  let playerButton = PlayerDetaislView()
-
+        
         let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
 
         mainTabController?.maximizePlayerDetails(podcast: podcast)
         mainTabController?.minimizePlayerDetails()
+        print("didSelectRow(PodcastViewController)", podcast.urlAddress)
+        
+    
         
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 150
     }
     
+
     
 }
+

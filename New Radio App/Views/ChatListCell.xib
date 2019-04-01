@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="106" id="D0V-AO-ewk" customClass="ChatListCell" customModule="New_Radio_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="399" height="106"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D0V-AO-ewk" id="lla-Ux-5lK">
+                <rect key="frame" x="0.0" y="0.0" width="399" height="105.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjT-6C-pK4">
+                        <rect key="frame" x="20" y="10" width="359" height="85.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3L3-0r-u95">
+                                <rect key="frame" x="141" y="23.5" width="77" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1143369229" green="0.85153023090000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3L3-0r-u95" firstAttribute="centerX" secondItem="DjT-6C-pK4" secondAttribute="centerX" id="awn-q9-PPi"/>
+                            <constraint firstItem="3L3-0r-u95" firstAttribute="centerY" secondItem="DjT-6C-pK4" secondAttribute="centerY" id="iu8-md-uRv"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="DjT-6C-pK4" secondAttribute="bottom" constant="10" id="JO2-fM-QMR"/>
+                    <constraint firstItem="DjT-6C-pK4" firstAttribute="leading" secondItem="lla-Ux-5lK" secondAttribute="leading" constant="20" id="OjO-eX-fvh"/>
+                    <constraint firstItem="DjT-6C-pK4" firstAttribute="top" secondItem="lla-Ux-5lK" secondAttribute="top" constant="10" id="Rhi-ts-EF1"/>
+                    <constraint firstAttribute="trailing" secondItem="DjT-6C-pK4" secondAttribute="trailing" constant="20" id="gq5-Y5-iO8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="chatNameLabel" destination="3L3-0r-u95" id="z4g-Sk-8ZB"/>
+                <outlet property="viewChatCel" destination="DjT-6C-pK4" id="rqS-tX-tnx"/>
+            </connections>
+            <point key="canvasLocation" x="72.799999999999997" y="72.863568215892059"/>
+        </tableViewCell>
+    </objects>
+</document>
