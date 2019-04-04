@@ -15,17 +15,14 @@ class PlayerDetaislView: UIView {
     
     
 
-
-    @IBAction func likeButtonPressed(_ sender: UIButton) {
-        
+    @IBOutlet weak var likebutton: UIButton!
+    
+    fileprivate func addToFavorites() {
         //let's check if we have already saved this podcast as fav
         let savedPodcasts = UserDefaults.standard.savePodcasts()
         let hasFavorited = savedPodcasts.index(where: { $0.name == self.podcast?.name }) != nil
         if hasFavorited {
-            
-            print("have allready!")
         } else {
-           
             guard let podcast = self.podcast else {return}
             var listOfPodcasts = UserDefaults.standard.savePodcasts()
             listOfPodcasts.append(podcast)
@@ -35,32 +32,55 @@ class PlayerDetaislView: UIView {
         }
     }
     
+    @IBAction func likeButtonPressed(_ favBtn: UIButton)  {
+        switch podcast.isFavorites {
+        case true:
+            podcast.isFavorites = false
+           // favBtn.setImage(UIImage(named: "icons8-hearts2"), for: .normal)
+            
+        case false:
+            podcast.isFavorites = true
+            favBtn.setImage(UIImage(named: "like"), for: .normal)
+            addToFavorites()
+            
+        default:
+            print("")
+        }
+       
+        
+        
+        
+    }
+    
     fileprivate func showBadgeHighlight(){
-        UIApplication.mainTabController()?.viewControllers?[0].tabBarItem.badgeValue = "חדש"
+        UIApplication.mainTabController()?.viewControllers?[1].tabBarItem.badgeValue = "חדש"
     }
     
     var podcast: Podcast!{
         didSet{
             episodeTitleLabel.text = podcast.name
+            podcastImageView.image = podcast.imageLocal
             miniTitileLabel.text = podcast.name
+            miniEpisodeImageView.image = podcast.imageLocal
             setUpNowPlayingInfo()
             setupAudioSession()
             playPodcast()
-            print("Player", podcast.urlAddress)
             
-            //CHECK IMAGE
             
-//            var nowPlayingInfo =
-//                MPNowPlayingInfoCenter.default().nowPlayingInfo
-//             var image = UIImage(cgImage: podcastImageView as! CGImage)
-//            let artwork = MPMediaItemArtwork(boundsSize: image.size) { (_) -> UIImage in
-//                return image
-//            }
-//            nowPlayingInfo![MPMediaItemArtwork] = artwork
-//
-//            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+            //Set image to lockscreen/notification
+            var nowPlayingInfo =
+                MPNowPlayingInfoCenter.default().nowPlayingInfo
+            let image =  podcast!.imageLocal
+  
+            let artwork = MPMediaItemArtwork(boundsSize: image.size) { (_) -> UIImage in
+              return image
+            }
+            nowPlayingInfo?[MPMediaItemPropertyArtwork] = artwork
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
         }
     }
+    
+    
    
     
     let player: AVPlayer = {
@@ -74,11 +94,11 @@ class PlayerDetaislView: UIView {
     fileprivate func playPodcast(){        
         let urlD = podcast.urlAddress
         
+        //url encode from hebrew
         let urlHebrew = urlD!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         guard let url = URL(string: urlHebrew ?? "") else {return}
 
         let playerItem = AVPlayerItem(url: url)
-        
         player.replaceCurrentItem(with: playerItem)
         player.play()
     }
@@ -115,15 +135,16 @@ class PlayerDetaislView: UIView {
         let times = [NSValue(time: time)]
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
             self?.enlargePodcastImageView()
-            self?.setupLockScreenDuration()
+          self?.setupLockScreenDuration()
         }
     }
     
     fileprivate func setupLockScreenDuration(){
         guard let duraction = player.currentItem?.duration else {return}
+
         let durationSeconds = CMTimeGetSeconds(duraction)
         MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = durationSeconds
-        
+
     }
     
     override func awakeFromNib() {
@@ -144,7 +165,7 @@ class PlayerDetaislView: UIView {
         return Bundle.main.loadNibNamed("PlayerDetaislView", owner: self, options: nil)?.first as! PlayerDetaislView
     }
     
-    fileprivate func setupInterruptionObserver(){
+fileprivate func setupInterruptionObserver(){
         let notificationCenter = NotificationCenter.default
         let session = AVAudioSession.sharedInstance()
         

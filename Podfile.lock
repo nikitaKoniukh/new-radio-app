@@ -1,6 +1,15 @@
 PODS:
   - Alamofire (4.6.0)
+  - BMSAnalyticsAPI (2.2.3)
+  - BMSCore (2.3.7):
+    - BMSAnalyticsAPI (~> 2.2)
+  - BMSPush (3.4.2):
+    - BMSCore (~> 2.0)
   - FeedKit (7.0.1)
+  - IBMCloudAppID (5.0.0):
+    - BMSCore
+    - JOSESwift
+  - JOSESwift (1.7.0)
   - SDWebImage (4.4.6):
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
@@ -8,23 +17,36 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.6.0)
+  - BMSCore
+  - BMSPush
   - FeedKit (= 7.0.1)
+  - IBMCloudAppID
   - SDWebImage
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - BMSAnalyticsAPI
+    - BMSCore
+    - BMSPush
     - FeedKit
+    - IBMCloudAppID
+    - JOSESwift
     - SDWebImage
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  BMSAnalyticsAPI: d259379069bb11d2ff365bf5b796a2677dfc3849
+  BMSCore: 0aea25908fe0f152fdf9df9391ab8369f76661aa
+  BMSPush: efdf5f9c90ca93e6a43d7ff843979d6843d14753
   FeedKit: 9be69ab57ef0eb922ee4b6c31cb6b8840a5bbb29
+  IBMCloudAppID: 17886a7a82b460d59f2a0509567b6ea383706516
+  JOSESwift: 7f5725e48542f648325d6cf1bceab83ffc991b9c
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 745c180568695cefb706ec364f7792fb13571b9c
+PODFILE CHECKSUM: 5a8f3eb0bbab388948a024adaaf061efeb1ce0ad
 
 COCOAPODS: 1.6.1

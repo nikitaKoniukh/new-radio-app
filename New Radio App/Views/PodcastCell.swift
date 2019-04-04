@@ -20,8 +20,18 @@ class PodcastCell: UITableViewCell {
     var podcast: Podcast?{
         didSet{
             trackNameLabel.text = podcast?.name
+            podcastImage.image = podcast?.imageLocal
+            
         }
     }
+    
+//    var myImage: UIImage?{
+//        didSet{
+//            podcastImage.image = myImage
+//            
+//            
+//        }
+//    }
     
     @IBAction func infoButtonPressed(_ sender: UIButton) {
         

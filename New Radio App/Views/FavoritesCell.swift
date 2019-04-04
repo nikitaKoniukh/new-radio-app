@@ -17,8 +17,10 @@ class FavoritesCell: UITableViewCell {
     var podcast: Podcast!{
         didSet{
             favoritesNameLabel.text = podcast.name
+            podcastImage.image = podcast.imageLocal
            
         }
     }
+
     
 }

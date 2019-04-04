@@ -10,5 +10,8 @@ target 'New Radio App' do
   pod 'SDWebImage'
   pod 'FeedKit', '7.0.1'
   pod 'SwiftyJSON'
+  pod 'BMSPush'
+  pod 'BMSCore'
+  pod 'IBMCloudAppID'
 
 end

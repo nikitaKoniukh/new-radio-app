@@ -120,7 +120,6 @@ class MainTabBarController: UITabBarController{
         if podcast != nil{
             playerDetailsView.podcast = podcast
             
-            print("maximizePlayerDetails(MainTabBarController)", podcast?.urlAddress)
         }
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {

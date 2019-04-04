@@ -77,6 +77,7 @@
 		CA51EFF4224A851E0061D0EA /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		CA61A6042252ADF200C43CD0 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CA61A6052252ADF200C43CD0 /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		CAEBD9F322534DFB003ECE29 /* New Radio App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "New Radio App.entitlements"; sourceTree = "<group>"; };
 		E48ED0300A695FFB7795B528 /* Pods_New_Radio_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_New_Radio_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -136,6 +137,7 @@
 				CA51EF4022476B2C0061D0EA /* Models */,
 				CA51EF3D22476A3E0061D0EA /* Controllers */,
 				CA51EF292245872F0061D0EA /* AppDelegate.swift */,
+				CAEBD9F322534DFB003ECE29 /* New Radio App.entitlements */,
 				CA51EF2B2245872F0061D0EA /* ViewController.swift */,
 				CA51EF2D2245872F0061D0EA /* Main.storyboard */,
 				CA51EF302245872F0061D0EA /* Assets.xcassets */,
@@ -152,10 +154,9 @@
 				CA51EF3B2247645D0061D0EA /* MainTabBarController.swift */,
 				CA51EF5E2248E67D0061D0EA /* FavoritesController.swift */,
 				CA1CB81E224D70AF002FFD54 /* ProfileViewController.swift */,
-				CA1CB82A224E04FA002FFD54 /* ChatListViewController.swift */,
 				CA24CEF22250AA9A00294141 /* InfoPodcastViewController.swift */,
+				CA1CB82A224E04FA002FFD54 /* ChatListViewController.swift */,
 				CA61A6042252ADF200C43CD0 /* ChatViewController.swift */,
-				CA61A6052252ADF200C43CD0 /* ChatViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -192,6 +193,7 @@
 				CA24CEEE22509ED400294141 /* FavoritesCell.swift */,
 				CA24CEEF22509ED400294141 /* FavoritesCell.xib */,
 				CA24CEF32250AA9A00294141 /* InfoPodcastViewController.xib */,
+				CA61A6052252ADF200C43CD0 /* ChatViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,6 +244,9 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -297,7 +302,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-New Radio App/Pods-New Radio App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BMSAnalyticsAPI/BMSAnalyticsAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/BMSCore/BMSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/BMSPush/BMSPush.framework",
 				"${BUILT_PRODUCTS_DIR}/FeedKit/FeedKit.framework",
+				"${BUILT_PRODUCTS_DIR}/IBMCloudAppID/IBMCloudAppID.framework",
+				"${BUILT_PRODUCTS_DIR}/JOSESwift/JOSESwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -306,7 +316,12 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSAnalyticsAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSPush.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FeedKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IBMCloudAppID.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JOSESwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -511,8 +526,10 @@
 			baseConfigurationReference = 11290FEFEB7E09FA28A8226D /* Pods-New Radio App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N5KK6475ZS;
+				CODE_SIGN_ENTITLEMENTS = "New Radio App/New Radio App.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: nikitos.koniukh@gmail.com (VA29J656V3)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "New Radio App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -520,6 +537,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NikitaKoniukh.New-Radio-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Radio Push Notification Dev cer";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -530,8 +548,10 @@
 			baseConfigurationReference = 86CB47780F6DDC11732A848C /* Pods-New Radio App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N5KK6475ZS;
+				CODE_SIGN_ENTITLEMENTS = "New Radio App/New Radio App.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: nikitos.koniukh@gmail.com (VA29J656V3)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "New Radio App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -539,6 +559,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NikitaKoniukh.New-Radio-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Radio Push Notification Dev cer";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

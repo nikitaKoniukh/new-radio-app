@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import BMSCore
+import BMSPush
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -21,10 +24,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = MainTabBarController()
         
-      setupAudioSession()
+        //permission of push notification
+        
+        UNUserNotificationCenter.current().delegate = self
+        
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .sound, .badge]) {
+                granted, error in
+                print("Permission granted: \(granted)")
+        }
+        
+        UIApplication.shared.registerForRemoteNotifications()
+        
+        registerForPush()
 
         return true
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let push  = BMSPushClient.sharedInstance
+       
+        push.registerWithDeviceToken(deviceToken: deviceToken) { (response, statusCode, error) -> Void in
+            
+            if error.isEmpty {
+                print( "Response during device registration: \(response) and status code is:\(statusCode)")
+            } else{
+                print( "Error during device registration: \(error) and status code is: \(statusCode)")
+            }
+        }
+        
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.notification.request.identifier == "testIdentifire"{
+             print("handlin app with idetifier")
+            completionHandler()
+        }
+    }
+
+
+
+func registerForPush() {
+        let myBMSClient = BMSClient.sharedInstance
+        myBMSClient.initialize(bluemixRegion: BMSClient.Region.unitedKingdom)
+        let push = BMSPushClient.sharedInstance
+        push.initializeWithAppGUID(appGUID: "b53c0e69-b5a2-4a48-a524-9ae474733b37",
+                                   clientSecret: "232f2f5f-a033-446f-a60b-9994b4f1664c")
+    }
+    
+    
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -51,19 +108,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-import AVKit
-extension AppDelegate{
-    func setupAudioSession(){
-        let session = AVAudioSession.sharedInstance()
-        do {
-            //set audiosession
-            try session.setCategory(.playAndRecord, mode: .default)
-            //activate the sesison
-            try session.setActive(true)
-        }catch let err{
-            print(err)
-        }
-    }
-    
-  
-}

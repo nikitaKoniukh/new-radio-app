@@ -9,8 +9,15 @@
 import UIKit
 import Alamofire
 import AVKit
+import BMSCore
+import BMSPush
+import UserNotifications
 
 class PodcastViewController: UITableViewController, UISearchBarDelegate {
+
+    
+  
+    
     
     var podcasts = [Podcast]()
     let celId = "cellId"
@@ -20,10 +27,13 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        imageArrayRandom()
+        
         
         setupTableView()
         setupSearchBar()
+        setupPushNotification()
+        //imageArrayData()
         
         APIService.shared.fetchPodcast { (podcasts) in
             self.podcasts = podcasts
@@ -36,6 +46,19 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
         //removing separators
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
+    
+    fileprivate func setupPushNotification(){
+        let content = UNMutableNotificationContent()
+        content.title = "Title"
+        content.body = "Body"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "testIdentifire", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
 
     
     fileprivate func buildPodcasts(podcastresults: [Podcast]) {
@@ -46,9 +69,12 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let podcastsResults = searchPodcasts(index: searchBar.selectedScopeButtonIndex, searchText: searchText)
-       
         buildPodcasts(podcastresults: podcastsResults)
-        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+       let podcastsResults = searchPodcasts(index: selectedScope, searchText: searchController.searchBar.text ?? "")
+        buildPodcasts(podcastresults: podcastsResults)
     }
     
     enum selectedScope: Int {
@@ -57,6 +83,7 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
         case name = 2
         case all = 3
     }
+    
     
     func searchPodcasts(index: Int, searchText: String)->[Podcast]{
        var podcastSearchArray: [Podcast] = []
@@ -112,14 +139,17 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.selectedScopeButtonIndex = 3
         searchController.searchBar.scopeButtonTitles = ["משתתפים","תיאור", "שם תוכנית", "הכל"]
         
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         
+
+        searchController.searchBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
         
     }
-    
     
     //MARK:- UITableView
     
@@ -132,16 +162,13 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.isActive == true && searchController.searchBar.text != ""{
+           
             return podcasts.count
         }
         podcasts = podcastsMain
         return podcastsMain.count
         
     }
-    
-  
-    
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: celId, for: indexPath) as! PodcastCell
@@ -152,8 +179,11 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
         
         let podcast = podcasts[indexPath.row]
         cell.podcast = podcast
+      // cell.myImage = imageArray[indexPath.row]
+     
         
-        cell.infoButton.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
+        cell.infoButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.infoButton.layer.cornerRadius = 20
         cell.infoButton.layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
@@ -164,7 +194,7 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
          cell.viewCell.layer.cornerRadius = 10
          cell.viewCell.layer.shadowOpacity = 1
          cell.viewCell.layer.shadowRadius = 5
-         cell.viewCell.layer.shadowColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
+         cell.viewCell.layer.shadowColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1).cgColor
          cell.viewCell.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         return cell

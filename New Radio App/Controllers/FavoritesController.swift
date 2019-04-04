@@ -60,7 +60,7 @@ class FavoritesController:UITableViewController {
         cell.viewCell.layer.cornerRadius = 5
         cell.viewCell.layer.shadowOpacity = 1
         cell.viewCell.layer.shadowRadius = 5
-        cell.viewCell.layer.shadowColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
+        cell.viewCell.layer.shadowColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1).cgColor
         cell.viewCell.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         return cell

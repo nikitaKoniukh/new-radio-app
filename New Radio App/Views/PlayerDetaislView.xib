@@ -226,6 +226,7 @@
                 <outlet property="currentTimeLabel" destination="9cr-ji-sc8" id="IEn-oc-6Fb"/>
                 <outlet property="duractionLabel" destination="1eb-90-l0a" id="XZ8-8S-AqS"/>
                 <outlet property="episodeTitleLabel" destination="dmA-cx-524" id="nev-DC-zEI"/>
+                <outlet property="likebutton" destination="IqA-b7-qbe" id="VOh-tC-xW4"/>
                 <outlet property="maximizedStackView" destination="Y7u-ZC-02a" id="kdb-NT-E9M"/>
                 <outlet property="miniEpisodeImageView" destination="y9L-c8-MAK" id="e77-JF-1Fb"/>
                 <outlet property="miniFastForwardButton" destination="X5C-0x-lyA" id="Bpd-1v-FrL"/>
