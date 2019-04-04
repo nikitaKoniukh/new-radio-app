@@ -42,9 +42,6 @@ class PlayerDetaislView: UIView {
             podcast.isFavorites = true
             favBtn.setImage(UIImage(named: "like"), for: .normal)
             addToFavorites()
-            
-        default:
-            print("")
         }
        
         

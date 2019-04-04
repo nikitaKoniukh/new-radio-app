@@ -12,8 +12,22 @@ import AVKit
 import BMSCore
 import BMSPush
 import UserNotifications
+import IBMCloudAppID
 
-class PodcastViewController: UITableViewController, UISearchBarDelegate {
+class PodcastViewController: UITableViewController, UISearchBarDelegate, AuthorizationDelegate {
+  
+    func onAuthorizationCanceled() {
+        
+    }
+    
+    func onAuthorizationFailure(error: AuthorizationError) {
+        
+    }
+    
+    func onAuthorizationSuccess(accessToken: AccessToken?, identityToken: IdentityToken?, refreshToken: RefreshToken?, response: Response?) {
+        
+    }
+    
 
     
   
@@ -27,6 +41,10 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        AppID.sharedInstance.loginWidget?.launch(delegate: self)
+      
+        
         imageArrayRandom()
         
         
@@ -151,6 +169,11 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
         
     }
     
+//    func filterList() { // should probably be called sort and not filter
+//        podcastsMain.sort() { $0.podcastsMain.timestamp > $1.timestamp } // sort the fruit by name
+//        tableView.reloadData(); // notify the table view the data has changed
+//    }
+    
     //MARK:- UITableView
     
     fileprivate func setupTableView(){
@@ -164,14 +187,20 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
         if searchController.isActive == true && searchController.searchBar.text != ""{
            
             return podcasts.count
+            
         }
         podcasts = podcastsMain
         return podcastsMain.count
         
     }
     
+ 
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: celId, for: indexPath) as! PodcastCell
+        
+       
        
         cell.viewCell.layer.borderWidth = 0.5
         cell.viewCell.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
@@ -179,7 +208,7 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate {
         
         let podcast = podcasts[indexPath.row]
         cell.podcast = podcast
-      // cell.myImage = imageArray[indexPath.row]
+        
      
         
         

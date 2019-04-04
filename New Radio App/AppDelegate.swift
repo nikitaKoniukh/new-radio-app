@@ -10,6 +10,7 @@ import UIKit
 import BMSCore
 import BMSPush
 import UserNotifications
+import IBMCloudAppID
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -38,8 +39,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         registerForPush()
 
+        //Initializing the App ID client SDK
+        AppID.sharedInstance.initialize(tenantId: "8b634220-d4f4-4137-9061-f7757c208825", region:AppID.REGION_UK)
+        
         return true
     }
+   
+    func application(_ application: UIApplication, open url: URL, options :[UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+        return AppID.sharedInstance.application(application, open: url, options: options)
+        
+    }
+    
+    
+    
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let push  = BMSPushClient.sharedInstance
