@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IBMCloudAppID
 
 class MainTabBarController: UITabBarController{
     override func viewDidLoad() {
@@ -29,8 +30,6 @@ class MainTabBarController: UITabBarController{
         viewControllers = [
             generateNavController(with: PodcastViewController(), title: "פודקאסטים", image: UIImage(named: "playlist")!),
             generateNavController(with: FavoritesController(), title: "מועדפים", image: UIImage(named: "like")!),
-//            generateNavController(with: ViewController(), title: "חיפוש", image: UIImage(named: "search")!),
-//            generateNavController(with: ViewController(), title: "התגים שלי", image: UIImage(named: "hashtag")!),
             generateNavController(with: ChatListViewController(), title: "המשובים שלי", image: UIImage(named: "chat")!)
         ]
     }
@@ -57,9 +56,10 @@ class MainTabBarController: UITabBarController{
     }
     
     @objc func profileBtn(){
+        
+        
                 let profileViewController = ProfileViewController()
-
-               navigationController?.pushViewController(profileViewController, animated: true)
+                navigationController?.present(profileViewController, animated: true)
         
 
     }
@@ -72,9 +72,6 @@ class MainTabBarController: UITabBarController{
     var bottomAnchorConstraint: NSLayoutConstraint!
     
     fileprivate func setupPlayerDetailViiew(){
-        print("Setting up PlayerDetailsView")
-        
-        
         // use auto layout
         //        view.addSubview(playerDetailsView)
         view.insertSubview(playerDetailsView, belowSubview: tabBar)
@@ -89,7 +86,6 @@ class MainTabBarController: UITabBarController{
         bottomAnchorConstraint.isActive = true
         
         minimizedTopAnchorConstraint = playerDetailsView.topAnchor.constraint(equalTo: tabBar.topAnchor, constant: -58)
-        //        minimizedTopAnchorConstraint.isActive = true
         
         playerDetailsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         playerDetailsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true

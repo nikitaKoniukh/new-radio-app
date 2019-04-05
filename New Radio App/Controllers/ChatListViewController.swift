@@ -7,8 +7,33 @@
 //
 
 import UIKit
+import IBMCloudAppID
+import BMSCore
+import BMSPush
+import UserNotifications
 
-class ChatListViewController: UITableViewController {
+class ChatListViewController: UITableViewController, AuthorizationDelegate {
+    
+    func onAuthorizationCanceled() {
+        
+    }
+    
+    func onAuthorizationFailure(error: AuthorizationError) {
+        print(error)
+    }
+    
+    func onAuthorizationSuccess(accessToken: AccessToken?, identityToken: IdentityToken?, refreshToken: RefreshToken?, response: Response?) {
+        
+//        print("Name",  identityToken?.name)
+//        print("userID " , identityToken?.subject)
+//        print("isAnonymous!!!!!! ", accessToken?.isAnonymous)
+
+        UserDefaults.standard.set(accessToken?.isAnonymous, forKey: "myIsAnonymous")
+        UserDefaults.standard.set(identityToken?.name, forKey: "myName")
+        UserDefaults.standard.set(identityToken?.subject, forKey: "myUserID")
+        
+    }
+    
     
     let cellId = "cellId"
     let cell = UITableViewCell()
@@ -16,10 +41,14 @@ class ChatListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
+        if UserDefaults.standard.string(forKey: "myIsAnonymous") == nil{
+            AppID.sharedInstance.signinAnonymously(authorizationDelegate: self)
+        }
         
+        setupTableView()
         //removing separators
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+       
 
     }
     
@@ -37,7 +66,7 @@ class ChatListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,12 +93,15 @@ class ChatListViewController: UITableViewController {
         
     }
     
-    
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        //let cell = messageArray[indexPath.row]
         let chatViewController = ChatViewController()
+        
         navigationController?.pushViewController(chatViewController, animated: true)
+        
+//        let targetNavigationController = UINavigationController(rootViewController: chatViewController)
+//        
+//        self.present(targetNavigationController, animated: true, completion: nil)
     }
     
 }

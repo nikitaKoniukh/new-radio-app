@@ -6,10 +6,68 @@ PODS:
   - BMSPush (3.4.2):
     - BMSCore (~> 2.0)
   - FeedKit (7.0.1)
+  - Firebase/Core (5.18.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.7.0)
+  - Firebase/CoreOnly (5.18.0):
+    - FirebaseCore (= 5.3.1)
+  - Firebase/Database (5.18.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.1.0)
+  - FirebaseAnalytics (5.7.0):
+    - FirebaseCore (~> 5.3)
+    - FirebaseInstanceID (~> 3.6)
+    - GoogleAppMeasurement (= 5.7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.3.1):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseDatabase (5.1.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - leveldb-library (~> 1.18)
+  - FirebaseInstanceID (3.7.0):
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/UserDefaults (~> 5.2)
+  - GoogleAppMeasurement (5.7.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (5.4.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.4.1)
+  - GoogleUtilities/Logger (5.4.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.4.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.4.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.4.1)"
+  - GoogleUtilities/Reachability (5.4.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.4.1):
+    - GoogleUtilities/Logger
   - IBMCloudAppID (5.0.0):
     - BMSCore
     - JOSESwift
   - JOSESwift (1.7.0)
+  - leveldb-library (1.20)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
   - SDWebImage (4.4.6):
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
@@ -20,6 +78,8 @@ DEPENDENCIES:
   - BMSCore
   - BMSPush
   - FeedKit (= 7.0.1)
+  - Firebase/Core
+  - Firebase/Database
   - IBMCloudAppID
   - SDWebImage
   - SwiftyJSON
@@ -31,8 +91,18 @@ SPEC REPOS:
     - BMSCore
     - BMSPush
     - FeedKit
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseDatabase
+    - FirebaseInstanceID
+    - GoogleAppMeasurement
+    - GoogleUtilities
     - IBMCloudAppID
     - JOSESwift
+    - leveldb-library
+    - nanopb
     - SDWebImage
     - SwiftyJSON
 
@@ -42,11 +112,21 @@ SPEC CHECKSUMS:
   BMSCore: 0aea25908fe0f152fdf9df9391ab8369f76661aa
   BMSPush: efdf5f9c90ca93e6a43d7ff843979d6843d14753
   FeedKit: 9be69ab57ef0eb922ee4b6c31cb6b8840a5bbb29
+  Firebase: 02f3281965c075426141a0ce1277e9de6649cab9
+  FirebaseAnalytics: 23851fe602c872130a2c5c55040b302120346cc2
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: 52f851b30e11360f1e67cf04b1edfebf0a47a2d3
+  FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
+  FirebaseInstanceID: bd6fc5a258884e206fd5c474ebe4f5b00e21770e
+  GoogleAppMeasurement: 6cf307834da065863f9faf4c0de0a936d81dd832
+  GoogleUtilities: 1e25823cbf46540b4284f6ef8e17b3a68ee12bbc
   IBMCloudAppID: 17886a7a82b460d59f2a0509567b6ea383706516
   JOSESwift: 7f5725e48542f648325d6cf1bceab83ffc991b9c
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 5a8f3eb0bbab388948a024adaaf061efeb1ce0ad
+PODFILE CHECKSUM: 093aeaba4f7067003acda8b674c231a4afaaf286
 
 COCOAPODS: 1.6.1

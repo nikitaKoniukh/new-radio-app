@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>114068835523-bcogfuje7qtjvjafbmncevpa7garrqmb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.114068835523-bcogfuje7qtjvjafbmncevpa7garrqmb</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>114068835523-6dh9jjiqcqv4u5vktslic3jo5cl3rl5i.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD9UmSnnJBCZGjF08TelytFyobTf06oZxg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>114068835523</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.NikitaKoniukh.New-Radio-App</string>
+	<key>PROJECT_ID</key>
+	<string>radioetzion</string>
+	<key>STORAGE_BUCKET</key>
+	<string>radioetzion.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:114068835523:ios:1f9c7d95dd9a3c52</string>
+	<key>DATABASE_URL</key>
+	<string>https://radioetzion.firebaseio.com</string>
+</dict>
+</plist>

@@ -13,5 +13,6 @@ target 'New Radio App' do
   pod 'BMSPush'
   pod 'BMSCore'
   pod 'IBMCloudAppID'
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
 end

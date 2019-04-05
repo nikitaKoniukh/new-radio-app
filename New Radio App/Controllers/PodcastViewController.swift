@@ -25,7 +25,7 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     }
     
     func onAuthorizationSuccess(accessToken: AccessToken?, identityToken: IdentityToken?, refreshToken: RefreshToken?, response: Response?) {
-        
+      UserDefaults.standard.set(accessToken?.isAnonymous, forKey: "isAnonymous")
     }
     
 
@@ -37,20 +37,27 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     let celId = "cellId"
     let searchController = UISearchController(searchResultsController: nil)
     var podcastsMain = [Podcast]()
+   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        AppID.sharedInstance.loginWidget?.launch(delegate: self)
-      
+    //AppID.sharedInstance.loginWidget?.launch(delegate: self)
+        
+//        if UserDefaults.standard.data(forKey: "isAnonymous") != nil{
+//           AppID.sharedInstance.signinAnonymously(authorizationDelegate: self)
+//            
+//        }
+//      
         
         imageArrayRandom()
+
         
         
         setupTableView()
         setupSearchBar()
-        setupPushNotification()
+        // setupPushNotification()
         //imageArrayData()
         
         APIService.shared.fetchPodcast { (podcasts) in
@@ -64,20 +71,6 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         //removing separators
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
-    
-    fileprivate func setupPushNotification(){
-        let content = UNMutableNotificationContent()
-        content.title = "Title"
-        content.body = "Body"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "testIdentifire", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-    }
-
     
     fileprivate func buildPodcasts(podcastresults: [Podcast]) {
         self.podcasts = podcastresults
@@ -159,7 +152,7 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         searchController.searchBar.showsScopeBar = true
         searchController.searchBar.selectedScopeButtonIndex = 3
         searchController.searchBar.scopeButtonTitles = ["משתתפים","תיאור", "שם תוכנית", "הכל"]
-        
+        navigationController?.hidesBarsOnSwipe = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         
@@ -265,6 +258,8 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+    
+  
     
 
     
