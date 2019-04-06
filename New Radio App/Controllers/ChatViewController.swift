@@ -13,15 +13,11 @@ import FirebaseDatabase
 class ChatViewController: UITableViewController {
 
     let cellId = "cellId"
-    
-        
-//
-//
-    
     var ref: DatabaseReference?
     var handle: DatabaseHandle?
     var playerDetailsView = PlayerDetaislView()
     var allComments = [CommentModel]()
+    var time = [String]()
     
     
     
@@ -40,16 +36,16 @@ class ChatViewController: UITableViewController {
             self.allComments = messages
             self.tableView.reloadData()
         }
+     
     }
     
     
     @objc func handleSend(){
         if !getTextMessage().isEmpty{
-                        let message = ["message" : getTextMessage(), "userID" : "userID", "userName" : "michal", "timestamp" : ServerValue.timestamp()] as [String : Any]
-            
-                        ref?.childByAutoId().setValue(message)
-                        inputTextField.text = ""
-                    }
+        let message = ["message" : getTextMessage(), "userID" : "userID", "userName" : "michal", "timestamp" : ServerValue.timestamp()] as [String : Any]
+            ref?.childByAutoId().setValue(message)
+            inputTextField.text = ""
+        }
     }
 
         func getTextMessage() -> String{
@@ -75,6 +71,7 @@ class ChatViewController: UITableViewController {
                     let userID = commentObject?["userID"]
                     let userName = commentObject?["userName"]
                     
+                    
                     let comment = CommentModel(message: message as! NSString, timestamp: timestamp as! NSNumber, userID: userID as! NSString, userName: userName as! NSString)
                     
                     allmessages.append(comment)
@@ -82,20 +79,18 @@ class ChatViewController: UITableViewController {
                 
                 for comment in allmessages{
                     let t = TimeInterval(exactly: comment.timestamp)!
-                    print(self.getTime(timestamp: t))
+                    self.time.append(self.getTime(timestamp: t))
                 }
                 completion(allmessages)
             }
         })
     }
     
-   
     
     
-
+    //format time
     func getTime(timestamp: TimeInterval) -> String{
         let date: NSDate! = NSDate(timeIntervalSince1970: timestamp/1000)
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yy HH:mm"
         dateFormatter.timeZone = TimeZone.current
@@ -137,7 +132,8 @@ class ChatViewController: UITableViewController {
         
         cell.textMessage.text = allComments[indexPath.row].message as String
         cell.nameMessage.text = allComments[indexPath.row].userName as String
-        //cell.dateMessage.text = allComments[indexPath.row].timestamp as String
+        
+        cell.dateMessage.text = time[indexPath.row]
         
         return cell
     }

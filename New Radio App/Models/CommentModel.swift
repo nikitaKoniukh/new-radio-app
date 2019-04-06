@@ -13,7 +13,4 @@ struct CommentModel{
     var timestamp:NSNumber
     var userID :NSString
     var userName:NSString
- 
-    
-    
 }
