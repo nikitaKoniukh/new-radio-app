@@ -42,7 +42,7 @@ class ChatViewController: UITableViewController {
     
     @objc func handleSend(){
         if !getTextMessage().isEmpty{
-        let message = ["message" : getTextMessage(), "userID" : "userID", "userName" : "michal", "timestamp" : ServerValue.timestamp()] as [String : Any]
+            let message = ["message" : getTextMessage(), "userID" : "userID", "userName" : UserDefaults.standard.string(forKey: "myUserID") ?? "", "timestamp" : ServerValue.timestamp()] as [String : Any]
             ref?.childByAutoId().setValue(message)
             inputTextField.text = ""
         }
@@ -143,6 +143,17 @@ class ChatViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        activityIndicator.color = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return allComments.isEmpty ? 200 : 0
     }
     
     

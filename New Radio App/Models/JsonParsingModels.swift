@@ -19,7 +19,7 @@ struct CloudantRowValue : Codable{
 struct CloudantRowCommentDoc : Codable{
     let id : String
     let rev : String
-    let timeStamp : String
+    let timeStamp : Int
     let podcastID : String
     let type : String
     let message : String
@@ -33,6 +33,7 @@ struct CloudantRowCommentDoc : Codable{
         case type
         case message
         case userID
+      
     }
 }
 
@@ -45,6 +46,7 @@ struct CloudantRowPodcastDoc : Codable {
     let broadcasters : [String]
     let url : String
     let participants : [String]
+    let timestamp: Int
     
 //    init(genericDoc : CloudantGenericDoc) {
 //        self.id = genericDoc.id!
@@ -65,6 +67,7 @@ struct CloudantRowPodcastDoc : Codable {
         case broadcasters
         case url = "urlAddress"
         case participants
+        case timestamp
     }
 }
 
@@ -83,6 +86,7 @@ struct CloudantGenericDoc : Codable {
     let broadcasters : [String]?
     let url : String?
     let participants : [String]?
+    let timestamp: Int?
     
     enum CodingKeys : String,CodingKey {
         case id = "_id"
@@ -100,6 +104,7 @@ struct CloudantGenericDoc : Codable {
         case broadcasters
         case url = "urlAddress"
         case participants
+        case timestamp
     }
     
     

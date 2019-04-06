@@ -60,11 +60,16 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         // setupPushNotification()
         //imageArrayData()
         
+        
         APIService.shared.fetchPodcast { (podcasts) in
             self.podcasts = podcasts
             self.podcastsMain = podcasts
+            //sort podcasts by date
+            let podcastSorted = self.podcastsMain.sorted(by: { ($0.timestamp ?? 0) > ($1.timestamp ?? 1) })
+            self.podcastsMain = podcastSorted
             self.tableView.reloadData()
         }
+        
         
         
         
@@ -75,7 +80,6 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     fileprivate func buildPodcasts(podcastresults: [Podcast]) {
         self.podcasts = podcastresults
         self.tableView.reloadData()
-    
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -155,17 +159,21 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         navigationController?.hidesBarsOnSwipe = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
-        
-
         searchController.searchBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         
     }
     
-//    func filterList() { // should probably be called sort and not filter
-//        podcastsMain.sort() { $0.podcastsMain.timestamp > $1.timestamp } // sort the fruit by name
-//        tableView.reloadData(); // notify the table view the data has changed
-//    }
+    //format time
+    func getTime(timestamp: TimeInterval) -> String{
+        let date: NSDate! = NSDate(timeIntervalSince1970: timestamp/1000)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yy HH:mm"
+        dateFormatter.timeZone = TimeZone.current
+        let timeStamp = dateFormatter.string(from: date as Date)
+        
+        return timeStamp
+    }
     
     //MARK:- UITableView
     
@@ -174,11 +182,12 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         let nib = UINib(nibName: "PodcastCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: celId)
     }
-    
+    var time = [String]()
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.isActive == true && searchController.searchBar.text != ""{
            
+          
             return podcasts.count
             
         }
@@ -202,9 +211,15 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         let podcast = podcasts[indexPath.row]
         cell.podcast = podcast
         
-     
-        
-        
+//        for comment in podcasts{
+//            let t = TimeInterval(exactly: comment.timestamp!)!
+//            let one = self.getTime(timestamp: t)
+//
+//            self.time.append(one)
+//
+//        }
+//        cell.trackNameLabel.text = time[indexPath.row]
+
         cell.infoButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.infoButton.layer.cornerRadius = 20
         cell.infoButton.layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -240,25 +255,28 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-        
-        
         let podcast = self.podcasts[indexPath.row]
-        
         let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
 
         mainTabController?.maximizePlayerDetails(podcast: podcast)
         mainTabController?.minimizePlayerDetails()
         print("didSelectRow(PodcastViewController)", podcast.urlAddress)
-        
-    
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        activityIndicator.color = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return podcasts.isEmpty ? 200 : 0
+    }
   
     
 

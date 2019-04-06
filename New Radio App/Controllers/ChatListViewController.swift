@@ -31,6 +31,7 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
         UserDefaults.standard.set(accessToken?.isAnonymous, forKey: "myIsAnonymous")
         UserDefaults.standard.set(identityToken?.name, forKey: "myName")
         UserDefaults.standard.set(identityToken?.subject, forKey: "myUserID")
+        print("myUserID", identityToken?.subject)
         
     }
     
@@ -41,9 +42,12 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if UserDefaults.standard.string(forKey: "myIsAnonymous") == nil{
+        print("IIIIDDDD", UserDefaults.standard.string(forKey: "myUserID") ?? "")
+        if UserDefaults.standard.string(forKey: "myUserID") == nil{
             AppID.sharedInstance.signinAnonymously(authorizationDelegate: self)
+            //AppID.sharedInstance.loginWidget?.launch(delegate: self)
         }
+        
         
         setupTableView()
         //removing separators
@@ -51,9 +55,6 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
        
 
     }
-    
-    
-    
     
     
     //MARK:- UITableView
@@ -66,7 +67,7 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

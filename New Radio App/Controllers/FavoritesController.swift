@@ -100,6 +100,19 @@ class FavoritesController:UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "הוסף כמה פודקאסטים המועדפים"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return self.podcasts.count > 0 ? 0 : 250
+    }
+    
     
     
 }

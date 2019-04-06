@@ -16,6 +16,7 @@ class Podcast: NSObject, Decodable, NSCoding {
         aCoder.encode(myDescription, forKey: "trackDescription")
         aCoder.encode(broadcasters, forKey: "trackBroadcasters")
         aCoder.encode(participants, forKey: "trackParticipants")
+        aCoder.encode(timestamp, forKey: "trackTimestamp")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,15 +25,16 @@ class Podcast: NSObject, Decodable, NSCoding {
         self.myDescription = aDecoder.decodeObject(forKey: "trackDescription") as? String
         self.broadcasters = aDecoder.decodeObject(forKey: "trackBroadcasters") as? [String]
         self.participants = aDecoder.decodeObject(forKey: "trackParticipants") as? [String]
-        
+        self.timestamp = aDecoder.decodeObject(forKey: "trackTimestamp") as? Int
     }
     
-    init(name : String,description: String,url : String, broad: [String], par: [String]) {
+    init(name : String,description: String,url : String, broad: [String], par: [String], timeS: Int) {
         self.name = name
         self.myDescription = description
         self.urlAddress = url
         self.broadcasters = broad
         self.participants = par
+        self.timestamp = timeS
     }
     
     static func from(cloudantPodcastDocument doc : CloudantRowPodcastDoc) -> Podcast{
@@ -41,8 +43,9 @@ class Podcast: NSObject, Decodable, NSCoding {
         let url = doc.url
         let broad = doc.broadcasters
         let part = doc.participants
+        let timeSt = doc.timestamp
         
-        return Podcast(name: name, description: desc, url: url, broad: broad, par: part)
+        return Podcast(name: name, description: desc, url: url, broad: broad, par: part, timeS: timeSt)
     }
     
     static func from(cloudantGenericDocument doc : CloudantGenericDoc) -> Podcast? {
@@ -56,8 +59,9 @@ class Podcast: NSObject, Decodable, NSCoding {
         let url = doc.url!
         let broad = doc.broadcasters!
         let part = doc.participants!
+        let timeSt = doc.timestamp!
         
-        return Podcast(name: name, description: desc, url: url, broad: broad, par: part)
+        return Podcast(name: name, description: desc, url: url, broad: broad, par: part, timeS: timeSt)
     }
     
     var name: String?
@@ -67,6 +71,7 @@ class Podcast: NSObject, Decodable, NSCoding {
     var participants: [String]?
     var imageLocal:UIImage = imageArrayRandom()
     var isFavorites: Bool = false
+    var timestamp: Int?
     
     
     
@@ -76,6 +81,7 @@ class Podcast: NSObject, Decodable, NSCoding {
         case urlAddress = "urlAddress"
         case broadcasters = "broadcasters"
         case participants = "participants"
+        case timestamp = "timestamp"
         
     }
     

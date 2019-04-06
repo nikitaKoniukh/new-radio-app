@@ -19,20 +19,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-ai-FoQ">
-                        <rect key="frame" x="20" y="10" width="335" height="109.5"/>
+                        <rect key="frame" x="10" y="10" width="355" height="109.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pod" translatesAutoresizingMaskIntoConstraints="NO" id="7MT-vG-Zpu">
-                                <rect key="frame" x="0.0" y="0.0" width="335" height="109.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="355" height="109.5"/>
                             </imageView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVr-aM-Puz">
-                                <rect key="frame" x="0.0" y="63.5" width="335" height="36"/>
+                                <rect key="frame" x="0.0" y="63.5" width="355" height="36"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.3024935788" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Yr-Rk-PBh">
-                                <rect key="frame" x="295" y="0.0" width="40" height="40"/>
+                                <rect key="frame" x="315" y="0.0" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="DwY-Uw-l10"/>
                                     <constraint firstAttribute="height" constant="40" id="gVn-5P-cMB"/>
@@ -58,9 +58,9 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="nhU-ai-FoQ" firstAttribute="leading" secondItem="fHF-B2-BDr" secondAttribute="leading" constant="20" id="6jJ-DN-7TM"/>
+                    <constraint firstItem="nhU-ai-FoQ" firstAttribute="leading" secondItem="fHF-B2-BDr" secondAttribute="leading" constant="10" id="6jJ-DN-7TM"/>
                     <constraint firstItem="nhU-ai-FoQ" firstAttribute="top" secondItem="fHF-B2-BDr" secondAttribute="top" constant="10" id="VMr-lc-5zk"/>
-                    <constraint firstAttribute="trailing" secondItem="nhU-ai-FoQ" secondAttribute="trailing" constant="20" id="XwO-fR-TOv"/>
+                    <constraint firstAttribute="trailing" secondItem="nhU-ai-FoQ" secondAttribute="trailing" constant="10" id="XwO-fR-TOv"/>
                     <constraint firstAttribute="bottom" secondItem="nhU-ai-FoQ" secondAttribute="bottom" constant="10" id="kft-7j-G7W"/>
                 </constraints>
             </tableViewCellContentView>
