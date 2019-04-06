@@ -23,14 +23,14 @@ class ChatViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        
         self.navigationController!.view.addSubview(messagesInputContainer)
         setupLayout()
         setupInputComponents()
        
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardNotification(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-       NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         getMessages { (messages) in
             self.allComments = messages
@@ -228,7 +228,7 @@ class ChatViewController: UITableViewController {
                 self.navigationController?.view.layoutIfNeeded()
             }) { (complete) in
                 if isKeyBoardShowing{
-                    let indexPath = NSIndexPath(item: self.allComments .count-1, section: 0)
+                    let indexPath = NSIndexPath(item: self.allComments.count-1, section: 0)
                     self.tableView.scrollToRow(at: indexPath as IndexPath, at: .bottom, animated: true)
                 }
             }

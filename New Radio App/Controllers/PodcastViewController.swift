@@ -25,7 +25,9 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     }
     
     func onAuthorizationSuccess(accessToken: AccessToken?, identityToken: IdentityToken?, refreshToken: RefreshToken?, response: Response?) {
-      UserDefaults.standard.set(accessToken?.isAnonymous, forKey: "isAnonymous")
+        //UserDefaults.standard.set(accessToken?.isAnonymous, forKey: "isAnonymous")
+        UserDefaults.standard.set(identityToken?.name, forKey: "myName")
+        UserDefaults.standard.set(identityToken?.subject, forKey: "myUserID")
     }
     
 
@@ -43,14 +45,16 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     override func viewDidLoad() {
         super.viewDidLoad()
        
-    //AppID.sharedInstance.loginWidget?.launch(delegate: self)
-        
-//        if UserDefaults.standard.data(forKey: "isAnonymous") != nil{
-//           AppID.sharedInstance.signinAnonymously(authorizationDelegate: self)
-//            
+//    print("UserID!!!!", UserDefaults.standard.data(forKey: "myUserID"))
+//        if UserDefaults.standard.data(forKey: "myUserID") != nil{
+//            //AppID.sharedInstance.signinAnonymously(authorizationDelegate: self)
+//            AppID.sharedInstance.loginWidget?.launch(delegate: self)
+//
 //        }
-//      
-        
+        let content = UNMutableNotificationContent()
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "testIdentifire", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         imageArrayRandom()
 
         
@@ -69,10 +73,6 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
             self.podcastsMain = podcastSorted
             self.tableView.reloadData()
         }
-        
-        
-        
-        
         //removing separators
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
@@ -182,14 +182,11 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         let nib = UINib(nibName: "PodcastCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: celId)
     }
+   
     var time = [String]()
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if searchController.isActive == true && searchController.searchBar.text != ""{
-           
-          
             return podcasts.count
-            
         }
         podcasts = podcastsMain
         return podcastsMain.count
@@ -202,8 +199,6 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: celId, for: indexPath) as! PodcastCell
         
-       
-       
         cell.viewCell.layer.borderWidth = 0.5
         cell.viewCell.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         cell.podcastImage.layer.cornerRadius = 10
