@@ -25,6 +25,7 @@ extension UserDefaults {
         let podcasts = savePodcasts()
         let filteredPodcasts = podcasts.filter { (p) -> Bool in
             return p.name != podcast.name
+            
                 //&& p.artistName != podcast.artistName
         }
         let data = NSKeyedArchiver.archivedData(withRootObject: filteredPodcasts)

@@ -45,25 +45,14 @@ class MainTabBarController: UITabBarController{
         navController.tabBarItem.title = title
         navController.tabBarItem.image = image
     
-        let imageProfile = UIImage(named: "profile")
         let nav = navController.navigationBar
         nav.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         rootViewController.navigationItem.title = title
         
-        rootViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(image: imageProfile, style: .plain, target: self, action: #selector(profileBtn))
-        
         return navController
     }
     
-    @objc func profileBtn(){
-        
-        
-                let profileViewController = ProfileViewController()
-                navigationController?.present(profileViewController, animated: true)
-        
 
-    }
-    
     
     
     let playerDetailsView = PlayerDetaislView.initFromNib()
@@ -92,7 +81,7 @@ class MainTabBarController: UITabBarController{
 
     }
     
-    @objc func minimizePlayerDetails(){
+     func minimizePlayerDetails(){
         maximizedTopAnchorConstraint.isActive = false
         bottomAnchorConstraint.constant = view.frame.height
         minimizedTopAnchorConstraint.isActive = true
@@ -106,6 +95,12 @@ class MainTabBarController: UITabBarController{
             self.playerDetailsView.maximizedStackView.alpha = 0
             self.playerDetailsView.minimizedStackView.alpha = 1
         })
+    }
+    
+    func noPlayerDesplayed(){
+        maximizedTopAnchorConstraint.isActive = false
+        bottomAnchorConstraint.constant = view.frame.height
+        minimizedTopAnchorConstraint.isActive = false
     }
     
     func  maximizePlayerDetails(podcast: Podcast?){

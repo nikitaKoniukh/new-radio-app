@@ -21,7 +21,7 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     }
     
     func onAuthorizationFailure(error: AuthorizationError) {
-        
+        print("My error!!!!!!!!!!!!!!!!!!!!!!", error)
     }
     
     func onAuthorizationSuccess(accessToken: AccessToken?, identityToken: IdentityToken?, refreshToken: RefreshToken?, response: Response?) {
@@ -45,10 +45,11 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     override func viewDidLoad() {
         super.viewDidLoad()
        
-//    print("UserID!!!!", UserDefaults.standard.data(forKey: "myUserID"))
+    print("UserID!!!!", UserDefaults.standard.data(forKey: "myUserID"))
+         //AppID.sharedInstance.loginWidget?.launch(delegate: self)
 //        if UserDefaults.standard.data(forKey: "myUserID") != nil{
 //            //AppID.sharedInstance.signinAnonymously(authorizationDelegate: self)
-//            AppID.sharedInstance.loginWidget?.launch(delegate: self)
+//
 //
 //        }
         let content = UNMutableNotificationContent()
@@ -75,7 +76,10 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         }
         //removing separators
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
+        
     }
+    
     
     fileprivate func buildPodcasts(podcastresults: [Podcast]) {
         self.podcasts = podcastresults
@@ -255,7 +259,6 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
 
         mainTabController?.maximizePlayerDetails(podcast: podcast)
         mainTabController?.minimizePlayerDetails()
-        print("didSelectRow(PodcastViewController)", podcast.urlAddress)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

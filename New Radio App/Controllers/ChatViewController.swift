@@ -12,21 +12,35 @@ import FirebaseDatabase
 
 class ChatViewController: UITableViewController {
 
-    let cellId = "cellId"
+    let cellId = "messageCell"
     var ref: DatabaseReference?
     var handle: DatabaseHandle?
     var playerDetailsView = PlayerDetaislView()
     var allComments = [CommentModel]()
     var time = [String]()
+    var chatId: String!
+    var userNameLogin = UserDefaults.standard.string(forKey: "UserNameLogin")
+    var userIdLogin = UserDefaults.standard.string(forKey: "myUserID")
     
+  
+    
+    var info: Podcast!{
+        didSet{
+            chatId = info._id
+        }
+    }
+    
+   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ref = Database.database().reference()
+  
         self.navigationController!.view.addSubview(messagesInputContainer)
         setupLayout()
         setupInputComponents()
+        
        
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardNotification(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -36,13 +50,37 @@ class ChatViewController: UITableViewController {
             self.allComments = messages
             self.tableView.reloadData()
         }
+        
+        setupTableView()
+        
      
+       
+        
+     
+    }
+
+    func createChatwithPodcastId(){
+
+       // let refComments = ref!.child("chats")
+       // let refChats = ref!.child(chatId)
+
+        let refChat = ref!.childByAutoId()
+
+        refChat.setValue(["message": ""])
+        refChat.updateChildValues(["timestamp": ""])
+        refChat.updateChildValues(["userID": ""])
+        refChat.updateChildValues(["userName": ""])
+
+
+
+
+        tableView.reloadData()
     }
     
     
     @objc func handleSend(){
         if !getTextMessage().isEmpty{
-            let message = ["message" : getTextMessage(), "userID" : "userID", "userName" : UserDefaults.standard.string(forKey: "myUserID") ?? "", "timestamp" : ServerValue.timestamp()] as [String : Any]
+            let message = ["message" : getTextMessage(), "userID" : userIdLogin ?? "", "userName" : userNameLogin ?? "", "timestamp" : ServerValue.timestamp()] as [String : Any]
             ref?.childByAutoId().setValue(message)
             inputTextField.text = ""
         }
@@ -52,17 +90,15 @@ class ChatViewController: UITableViewController {
             return inputTextField.text!
         }
     
-    
-    
-    
+
     // MARK: - get messages
-    
     func getMessages(completion:@escaping ([CommentModel])->()){
-        ref = Database.database().reference().child("comments").child("4f65738da2b2cf507e0f988e057fc5a4")
+        ref = Database.database().reference().child("comments").child(chatId)
         
         ref?.observe(.value, with: { (snapshot) in
             if snapshot.childrenCount > 0{
                 self.allComments.removeAll()
+               // self.tableView.reloadData()
                  var allmessages = [CommentModel]()
                 for comments in snapshot.children.allObjects as! [DataSnapshot]{
                     let commentObject = comments.value as? [String : AnyObject]
@@ -104,12 +140,18 @@ class ChatViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tabBarController?.tabBar.isHidden = true
+        let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
+        mainTabController?.noPlayerDesplayed()
+        
         
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         tabBarController?.tabBar.isHidden = false
         inputTextField.endEditing(true)
+        
+        let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
+        mainTabController?.minimizePlayerDetails()
     }
     
     //MARK:- UITableView
@@ -117,9 +159,10 @@ class ChatViewController: UITableViewController {
     fileprivate func setupTableView(){
         //register tables view
         let nib = UINib(nibName: "MessageCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: cellId)
+        tableView.register(nib, forCellReuseIdentifier: "messageCell")
         //removing separators
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
 
     }
     
@@ -128,12 +171,23 @@ class ChatViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MessageCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageCell
         
         cell.textMessage.text = allComments[indexPath.row].message as String
         cell.nameMessage.text = allComments[indexPath.row].userName as String
         
         cell.dateMessage.text = time[indexPath.row]
+        
+        cell.selectionStyle = .none
+        
+        cell.messageViewCell.layer.borderWidth = 0.5
+        cell.messageViewCell.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        // Make it card-like
+        cell.messageViewCell.layer.cornerRadius = 5
+        cell.messageViewCell.layer.shadowOpacity = 1
+        cell.messageViewCell.layer.shadowRadius = 5
+        cell.messageViewCell.layer.shadowColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1).cgColor
+        cell.messageViewCell.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         return cell
     }
@@ -145,18 +199,18 @@ class ChatViewController: UITableViewController {
         return 100
     }
     
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicator.color = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-        activityIndicator.startAnimating()
-        return activityIndicator
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "שלח את המשוב הראשון שלך"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
+        return label
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return allComments.isEmpty ? 200 : 0
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return self.allComments.count > 0 ? 0 : 250
     }
-    
-    
     
     //MARK: - textField & keyboard
     let messagesInputContainer: UIView = {
@@ -187,6 +241,8 @@ class ChatViewController: UITableViewController {
     var bottomConstraint: NSLayoutConstraint?
     
     private func setupLayout() {
+        self.navigationController!.view.addSubview(messagesInputContainer)
+        
         messagesInputContainer.centerXAnchor.constraint(equalTo: (navigationController?.view.centerXAnchor)!).isActive = true
         messagesInputContainer.widthAnchor.constraint(equalToConstant: (navigationController?.view.frame.width)!).isActive = true
         messagesInputContainer.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -228,8 +284,8 @@ class ChatViewController: UITableViewController {
                 self.navigationController?.view.layoutIfNeeded()
             }) { (complete) in
                 if isKeyBoardShowing{
-                    let indexPath = NSIndexPath(item: self.allComments.count-1, section: 0)
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: .bottom, animated: true)
+//                    let indexPath = NSIndexPath(item: self.allComments.count-1, section: 0)
+//                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: .bottom, animated: true)
                 }
             }
         }

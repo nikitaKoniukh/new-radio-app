@@ -13,8 +13,4 @@ class ChatListCell: UITableViewCell {
     //Outlets
     @IBOutlet weak var chatNameLabel: UILabel!
     @IBOutlet weak var viewChatCel: UIView!
-    
-
-    
-    
 }

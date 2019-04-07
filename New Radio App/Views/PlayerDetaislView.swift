@@ -11,8 +11,26 @@ import AVKit
 import MediaPlayer
 
 class PlayerDetaislView: UIView {
+     var podcasts = [Podcast]()
     
-    
+    @IBOutlet weak var chatButton: UIButton!
+    @IBAction func feedbackButtonpPressed(_ sender: UIButton) {
+        
+        switch podcast.isFeedbackOn {
+        case true:
+            podcast.isFeedbackOn = false
+
+        case false:
+            
+            addToFeedback()
+
+            podcast.isFeedbackOn = true
+            
+            let mainTabController =  UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
+            mainTabController?.minimizePlayerDetails()
+        }
+        
+    }
     
 
     @IBOutlet weak var likebutton: UIButton!
@@ -32,6 +50,24 @@ class PlayerDetaislView: UIView {
         }
     }
     
+    
+    fileprivate func addToFeedback() {
+        //let's check if we have already saved this podcast as fav
+        let savedFeedbacks = UserDefaults.standard.saveFeedback()
+        let hasFavorited = savedFeedbacks.index(where: { $0._id == self.podcast?._id }) != nil
+        if hasFavorited {
+        } else {
+            guard let podcast = self.podcast else {return}
+            var listOfPodcasts = UserDefaults.standard.saveFeedback()
+            listOfPodcasts.append(podcast)
+            let data = try! NSKeyedArchiver.archivedData(withRootObject: listOfPodcasts, requiringSecureCoding: false)
+            UserDefaults.standard.set(data, forKey: UserDefaults.feedbackPodcastKey)
+            showBadgeFeedback()
+        }
+    }
+    
+    
+    
     @IBAction func likeButtonPressed(_ favBtn: UIButton)  {
         switch podcast.isFavorites {
         case true:
@@ -48,6 +84,10 @@ class PlayerDetaislView: UIView {
         
         
     }
+    fileprivate func showBadgeFeedback(){
+        UIApplication.mainTabController()?.viewControllers?[2].tabBarItem.badgeValue = "feedback"
+    }
+
     
     fileprivate func showBadgeHighlight(){
         UIApplication.mainTabController()?.viewControllers?[1].tabBarItem.badgeValue = "חדש"
@@ -97,6 +137,7 @@ class PlayerDetaislView: UIView {
 
         let playerItem = AVPlayerItem(url: url)
         player.replaceCurrentItem(with: playerItem)
+        //chatButton.isHidden = false
         player.play()
     }
     
