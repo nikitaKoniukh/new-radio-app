@@ -6,7 +6,7 @@ target 'New Radio App' do
   use_frameworks!
 
   # Pods for New Radio App
-  pod 'Alamofire', '~> 4.6.0'
+
   pod 'SDWebImage'
   pod 'FeedKit', '7.0.1'
   pod 'SwiftyJSON'
@@ -15,4 +15,5 @@ target 'New Radio App' do
   pod 'IBMCloudAppID'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  
 end

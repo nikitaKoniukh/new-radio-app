@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8298B3864931B6B05E8A67FC /* Pods_New_Radio_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48ED0300A695FFB7795B528 /* Pods_New_Radio_App.framework */; };
-		CA1CB820224D70AF002FFD54 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CB81E224D70AF002FFD54 /* ProfileViewController.swift */; };
-		CA1CB821224D70AF002FFD54 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1CB81F224D70AF002FFD54 /* ProfileViewController.xib */; };
 		CA1CB823224DFBD3002FFD54 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CB822224DFBD3002FFD54 /* APIService.swift */; };
 		CA1CB825224DFBD9002FFD54 /* JsonParsingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CB824224DFBD9002FFD54 /* JsonParsingModels.swift */; };
 		CA1CB827224DFBE3002FFD54 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CB826224DFBE2002FFD54 /* Podcast.swift */; };
@@ -20,6 +18,8 @@
 		CA24CEF122509ED400294141 /* FavoritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA24CEEF22509ED400294141 /* FavoritesCell.xib */; };
 		CA24CEF42250AA9A00294141 /* InfoPodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA24CEF22250AA9A00294141 /* InfoPodcastViewController.swift */; };
 		CA24CEF52250AA9A00294141 /* InfoPodcastViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA24CEF32250AA9A00294141 /* InfoPodcastViewController.xib */; };
+		CA29A897225CB0C40060D575 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA29A896225CB0C40060D575 /* Modal.swift */; };
+		CA29A899225CB0F90060D575 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA29A898225CB0F90060D575 /* CustomAlert.swift */; };
 		CA3D093522564C750079C482 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA3D093422564C750079C482 /* GoogleService-Info.plist */; };
 		CA3D096C22574EC70079C482 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D096B22574EC70079C482 /* ChatViewController.swift */; };
 		CA3D0981225778B90079C482 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D097F225778B90079C482 /* MessageCell.swift */; };
@@ -48,8 +48,6 @@
 /* Begin PBXFileReference section */
 		11290FEFEB7E09FA28A8226D /* Pods-New Radio App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New Radio App.debug.xcconfig"; path = "Target Support Files/Pods-New Radio App/Pods-New Radio App.debug.xcconfig"; sourceTree = "<group>"; };
 		86CB47780F6DDC11732A848C /* Pods-New Radio App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New Radio App.release.xcconfig"; path = "Target Support Files/Pods-New Radio App/Pods-New Radio App.release.xcconfig"; sourceTree = "<group>"; };
-		CA1CB81E224D70AF002FFD54 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		CA1CB81F224D70AF002FFD54 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		CA1CB822224DFBD3002FFD54 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		CA1CB824224DFBD9002FFD54 /* JsonParsingModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParsingModels.swift; sourceTree = "<group>"; };
 		CA1CB826224DFBE2002FFD54 /* Podcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
@@ -60,6 +58,8 @@
 		CA24CEEF22509ED400294141 /* FavoritesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesCell.xib; sourceTree = "<group>"; };
 		CA24CEF22250AA9A00294141 /* InfoPodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPodcastViewController.swift; sourceTree = "<group>"; };
 		CA24CEF32250AA9A00294141 /* InfoPodcastViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoPodcastViewController.xib; sourceTree = "<group>"; };
+		CA29A896225CB0C40060D575 /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
+		CA29A898225CB0F90060D575 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		CA3D093422564C750079C482 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA3D096B22574EC70079C482 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CA3D097F225778B90079C482 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -118,6 +118,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CA29A895225CB0B00060D575 /* Prrotocol */ = {
+			isa = PBXGroup;
+			children = (
+				CA29A896225CB0C40060D575 /* Modal.swift */,
+			);
+			path = Prrotocol;
+			sourceTree = "<group>";
+		};
 		CA51EF1D2245872F0061D0EA = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +147,7 @@
 		CA51EF282245872F0061D0EA /* New Radio App */ = {
 			isa = PBXGroup;
 			children = (
+				CA29A895225CB0B00060D575 /* Prrotocol */,
 				CA51EF572247B33F0061D0EA /* Extensions */,
 				CA51EF48224787420061D0EA /* Views */,
 				CA51EF45224782A90061D0EA /* Service */,
@@ -162,7 +171,6 @@
 				CA51EF3E22476AD10061D0EA /* PodcastViewController.swift */,
 				CA51EF3B2247645D0061D0EA /* MainTabBarController.swift */,
 				CA51EF5E2248E67D0061D0EA /* FavoritesController.swift */,
-				CA1CB81E224D70AF002FFD54 /* ProfileViewController.swift */,
 				CA24CEF22250AA9A00294141 /* InfoPodcastViewController.swift */,
 				CA3D096B22574EC70079C482 /* ChatViewController.swift */,
 				CA1CB82A224E04FA002FFD54 /* ChatListViewController.swift */,
@@ -199,12 +207,12 @@
 				CA1CB82C224E0744002FFD54 /* ChatListCell.xib */,
 				CA1CB82E224E07D2002FFD54 /* ChatListCell.swift */,
 				CA51EF602248EE000061D0EA /* FavoritePodcastCell.swift */,
-				CA1CB81F224D70AF002FFD54 /* ProfileViewController.xib */,
 				CA24CEEE22509ED400294141 /* FavoritesCell.swift */,
 				CA24CEEF22509ED400294141 /* FavoritesCell.xib */,
 				CA24CEF32250AA9A00294141 /* InfoPodcastViewController.xib */,
 				CA3D097F225778B90079C482 /* MessageCell.swift */,
 				CA3D0980225778B90079C482 /* MessageCell.xib */,
+				CA29A898225CB0F90060D575 /* CustomAlert.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,7 +303,6 @@
 				CA3D0982225778B90079C482 /* MessageCell.xib in Resources */,
 				CA51EF312245872F0061D0EA /* Assets.xcassets in Resources */,
 				CA24CEF52250AA9A00294141 /* InfoPodcastViewController.xib in Resources */,
-				CA1CB821224D70AF002FFD54 /* ProfileViewController.xib in Resources */,
 				CA51EF4A224787560061D0EA /* PodcastCell.xib in Resources */,
 				CA1CB82D224E0744002FFD54 /* ChatListCell.xib in Resources */,
 				CA51EF52224796490061D0EA /* PlayerDetaislView.xib in Resources */,
@@ -317,7 +324,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-New Radio App/Pods-New Radio App-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BMSAnalyticsAPI/BMSAnalyticsAPI.framework",
 				"${BUILT_PRODUCTS_DIR}/BMSCore/BMSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/BMSPush/BMSPush.framework",
@@ -334,7 +340,6 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSAnalyticsAPI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSPush.framework",
@@ -381,11 +386,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA29A899225CB0F90060D575 /* CustomAlert.swift in Sources */,
 				CA1CB823224DFBD3002FFD54 /* APIService.swift in Sources */,
 				CA51EF5F2248E67D0061D0EA /* FavoritesController.swift in Sources */,
 				CA1CB82B224E04FA002FFD54 /* ChatListViewController.swift in Sources */,
 				CA51EF5D224820930061D0EA /* UIApplication.swift in Sources */,
-				CA1CB820224D70AF002FFD54 /* ProfileViewController.swift in Sources */,
 				CA51EF612248EE000061D0EA /* FavoritePodcastCell.swift in Sources */,
 				CA3D0981225778B90079C482 /* MessageCell.swift in Sources */,
 				CA51EF56224799680061D0EA /* PlayerDetaislView.swift in Sources */,
@@ -401,6 +406,7 @@
 				CA3D098A22596CD10079C482 /* UserDefaultsFeedback.swift in Sources */,
 				CA51EFF5224A851E0061D0EA /* UserDefaults.swift in Sources */,
 				CA1CB827224DFBE3002FFD54 /* Podcast.swift in Sources */,
+				CA29A897225CB0C40060D575 /* Modal.swift in Sources */,
 				CA1CB825224DFBD9002FFD54 /* JsonParsingModels.swift in Sources */,
 				CA51EF3F22476AD10061D0EA /* PodcastViewController.swift in Sources */,
 				CA51EF592247B3720061D0EA /* CMTime.swift in Sources */,

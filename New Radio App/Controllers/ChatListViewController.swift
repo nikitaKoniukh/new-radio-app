@@ -18,7 +18,7 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
     let cellId = "cellId"
     let cell = UITableViewCell()
     var ref: DatabaseReference?
-
+    let alert = CustomAlert(title: "ספר לנו, מה שמך", image: UIImage(named: "pod")!)
 
 
     
@@ -35,14 +35,14 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+       
         if UserDefaults.standard.string(forKey: "UserNameLogin") == nil || UserDefaults.standard.string(forKey: "UserNameLogin") == ""{
-            alerDialogLogin()
+            
+            alert.show(animated: true)
         }
-       // print("IIIIDDDD", UserDefaults.standard.string(forKey: "myUserID") ?? "")
         if UserDefaults.standard.string(forKey: "myUserID") == nil{
-            alerDialogLogin()
+           
+            alert.show(animated: true)
             AppID.sharedInstance.signinAnonymously(authorizationDelegate: self)
             //AppID.sharedInstance.loginWidget?.launch(delegate: self)
         }else if UserDefaults.standard.string(forKey: "myUserID") != nil{
@@ -53,35 +53,17 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
         setupTableView()
         //removing separators
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
+        
 
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if UserDefaults.standard.string(forKey: "UserNameLogin") == nil || UserDefaults.standard.string(forKey: "UserNameLogin") == ""{
-            alerDialogLogin()
+            alert.show(animated: true)
         }
     }
 
-    
-    func alerDialogLogin(){
-        let alert = UIAlertController(title: "ספר לנו, מה שמך", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "בטל", style: .cancel, handler: nil))
-        
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "הכנס את שמך כאן"
-        })
-        
-        alert.addAction(UIAlertAction(title: "סבבה", style: .default, handler: { action in
-            
-            if let name = alert.textFields?.first?.text {
-                print("Your name: \(name)")
-            UserDefaults.standard.set(name, forKey: "UserNameLogin")
-            }
-        }))
-        
-        self.present(alert, animated: true)
-    }
-    
     
     //MARK:- UITableView
     
@@ -99,26 +81,29 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatListCell
         
-        cell.chatNameLabel.text = podcasts[indexPath.row].name
+        cell.viewCell.layer.borderWidth = 0.5
+        cell.viewCell.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        cell.podcastImage.layer.cornerRadius = 5
         
-        cell.viewChatCel.layer.borderWidth = 0.5
-        cell.viewChatCel.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        let podcast = podcasts[indexPath.row]
+        cell.podcast = podcast
+        
+        
         // Make it card-like
-        cell.viewChatCel.layer.cornerRadius = 10
-        cell.viewChatCel.layer.shadowOpacity = 1
-        cell.viewChatCel.layer.shadowRadius = 5
-        cell.viewChatCel.layer.shadowColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).cgColor
-        cell.viewChatCel.layer.shadowOffset = CGSize(width: 3, height: 3)
-
-      
+        cell.viewCell.layer.cornerRadius = 5
+        cell.viewCell.layer.shadowOpacity = 1
+        cell.viewCell.layer.shadowRadius = 5
+        cell.viewCell.layer.shadowColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1).cgColor
+        cell.viewCell.layer.shadowOffset = CGSize(width: 3, height: 3)
         
+        cell.imageChat.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         return cell
     }
     
 
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 120
         
     }
     
@@ -131,7 +116,7 @@ class ChatListViewController: UITableViewController, AuthorizationDelegate {
             chatViewController.info = podcasts[indexPath.row]
             navigationController?.pushViewController(chatViewController, animated: true)
         }else{
-            alerDialogLogin()
+            alert.show(animated: true)
         }
         
         
@@ -189,4 +174,7 @@ func onAuthorizationSuccess(accessToken: AccessToken?, identityToken: IdentityTo
     UserDefaults.standard.set(identityToken?.subject, forKey: "myUserID")
     // print("myUserID", identityToken?.subject)
      }
+
+
 }
+

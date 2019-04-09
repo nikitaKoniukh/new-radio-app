@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (4.6.0)
   - BMSAnalyticsAPI (2.2.3)
   - BMSCore (2.3.7):
     - BMSAnalyticsAPI (~> 2.2)
@@ -74,7 +73,6 @@ PODS:
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.6.0)
   - BMSCore
   - BMSPush
   - FeedKit (= 7.0.1)
@@ -86,7 +84,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
     - BMSAnalyticsAPI
     - BMSCore
     - BMSPush
@@ -107,7 +104,6 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   BMSAnalyticsAPI: d259379069bb11d2ff365bf5b796a2677dfc3849
   BMSCore: 0aea25908fe0f152fdf9df9391ab8369f76661aa
   BMSPush: efdf5f9c90ca93e6a43d7ff843979d6843d14753
@@ -127,6 +123,6 @@ SPEC CHECKSUMS:
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 093aeaba4f7067003acda8b674c231a4afaaf286
+PODFILE CHECKSUM: d8be823ab0ba2f689cfd5073ca1a9e546dc54461
 
 COCOAPODS: 1.6.1

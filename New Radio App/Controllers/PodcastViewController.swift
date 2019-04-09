@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import AVKit
 import BMSCore
 import BMSPush
@@ -56,12 +55,14 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         let request = UNNotificationRequest(identifier: "testIdentifire", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        imageArrayRandom()
+       
 
         
-        
-        setupTableView()
+        imageArrayRandom()
+       // setupTableView()
         setupSearchBar()
+       
+        setupTableView()
         // setupPushNotification()
         //imageArrayData()
         
@@ -77,8 +78,9 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         //removing separators
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        
+       
     }
+    
     
     
     fileprivate func buildPodcasts(podcastresults: [Podcast]) {
@@ -153,11 +155,14 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         return podcastSearchArray
     }
     
+
+    
     fileprivate func setupSearchBar(){
         self.definesPresentationContext = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.showsScopeBar = true
+      
         searchController.searchBar.selectedScopeButtonIndex = 3
         searchController.searchBar.scopeButtonTitles = ["משתתפים","תיאור", "שם תוכנית", "הכל"]
         navigationController?.hidesBarsOnSwipe = true
@@ -165,8 +170,9 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         searchController.searchBar.delegate = self
         searchController.searchBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
-        
     }
+    
+  
     
     //format time
     func getTime(timestamp: TimeInterval) -> String{
@@ -196,10 +202,7 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         return podcastsMain.count
         
     }
-    
  
-    
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: celId, for: indexPath) as! PodcastCell
         
@@ -209,15 +212,6 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         
         let podcast = podcasts[indexPath.row]
         cell.podcast = podcast
-        
-//        for comment in podcasts{
-//            let t = TimeInterval(exactly: comment.timestamp!)!
-//            let one = self.getTime(timestamp: t)
-//
-//            self.time.append(one)
-//
-//        }
-//        cell.trackNameLabel.text = time[indexPath.row]
 
         cell.infoButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.infoButton.layer.cornerRadius = 20
@@ -246,9 +240,8 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         
          infoViewController.info = podcast
         
-        navigationController?.pushViewController(infoViewController, animated: true)
         
-       
+        navigationController?.pushViewController(infoViewController, animated: false)
 
     }
 
@@ -277,7 +270,38 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
     }
   
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        animateTable()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidAppear(false)
+    }
 
+    
+    
+    
+    func animateTable() {
+        tableView.reloadData()
+        let cells = tableView.visibleCells
+        
+        let tableViewHeight = tableView.bounds.size.height
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        
+        var delayCounter = 0
+        for cell in cells {
+            UIView.animate(withDuration: 1.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                cell.transform = CGAffineTransform.identity
+            }, completion: nil)
+            delayCounter += 1
+        }
+        
+        
+    }
     
 }
 

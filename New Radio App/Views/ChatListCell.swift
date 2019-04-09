@@ -11,6 +11,16 @@ import UIKit
 class ChatListCell: UITableViewCell {
     
     //Outlets
-    @IBOutlet weak var chatNameLabel: UILabel!
-    @IBOutlet weak var viewChatCel: UIView!
+    @IBOutlet weak var podcastImage: UIImageView!
+    @IBOutlet weak var viewCell: UIView!
+    @IBOutlet weak var favoritesNameLabel: UILabel!
+    @IBOutlet weak var imageChat: UIImageView!
+    
+    var podcast: Podcast!{
+        didSet{
+            favoritesNameLabel.text = podcast.name
+            podcastImage.image = podcast.imageLocal
+            
+        }
+    }
 }
