@@ -15,5 +15,6 @@ target 'New Radio App' do
   pod 'IBMCloudAppID'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'ReachabilitySwift'
   
 end

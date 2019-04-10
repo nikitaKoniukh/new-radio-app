@@ -67,6 +67,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - ReachabilitySwift (4.3.0)
   - SDWebImage (4.4.6):
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
@@ -79,6 +80,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - IBMCloudAppID
+  - ReachabilitySwift
   - SDWebImage
   - SwiftyJSON
 
@@ -100,6 +102,7 @@ SPEC REPOS:
     - JOSESwift
     - leveldb-library
     - nanopb
+    - ReachabilitySwift
     - SDWebImage
     - SwiftyJSON
 
@@ -120,9 +123,10 @@ SPEC CHECKSUMS:
   JOSESwift: 7f5725e48542f648325d6cf1bceab83ffc991b9c
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: d8be823ab0ba2f689cfd5073ca1a9e546dc54461
+PODFILE CHECKSUM: a71d994b9cccd448fc404083eb7f22c9be110f64
 
 COCOAPODS: 1.6.1

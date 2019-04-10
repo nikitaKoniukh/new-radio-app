@@ -12,51 +12,28 @@ import BMSCore
 import BMSPush
 import UserNotifications
 import IBMCloudAppID
+import Reachability
 
-class PodcastViewController: UITableViewController, UISearchBarDelegate, AuthorizationDelegate {
-  
-    func onAuthorizationCanceled() {
-        
-    }
-    
-    func onAuthorizationFailure(error: AuthorizationError) {
-        print("My error!!!!!!!!!!!!!!!!!!!!!!", error)
-    }
-    
-    func onAuthorizationSuccess(accessToken: AccessToken?, identityToken: IdentityToken?, refreshToken: RefreshToken?, response: Response?) {
-        //UserDefaults.standard.set(accessToken?.isAnonymous, forKey: "isAnonymous")
-        UserDefaults.standard.set(identityToken?.name, forKey: "myName")
-        UserDefaults.standard.set(identityToken?.subject, forKey: "myUserID")
-    }
-    
 
-    
-  
-    
-    
+class PodcastViewController: UITableViewController, UISearchBarDelegate {
+
     var podcasts = [Podcast]()
     let celId = "cellId"
     let searchController = UISearchController(searchResultsController: nil)
     var podcastsMain = [Podcast]()
-   
+    let reachability = Reachability()!
     
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-    print("UserID!!!!", UserDefaults.standard.data(forKey: "myUserID"))
-         //AppID.sharedInstance.loginWidget?.launch(delegate: self)
-//        if UserDefaults.standard.data(forKey: "myUserID") != nil{
-//            //AppID.sharedInstance.signinAnonymously(authorizationDelegate: self)
-//
-//
-//        }
+        setReachabilityNotifire()
+    
         let content = UNMutableNotificationContent()
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         let request = UNNotificationRequest(identifier: "testIdentifire", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
        
-
         
         imageArrayRandom()
        // setupTableView()
@@ -64,9 +41,7 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
        
         setupTableView()
         // setupPushNotification()
-        //imageArrayData()
-        
-        
+   
         APIService.shared.fetchPodcast { (podcasts) in
             self.podcasts = podcasts
             self.podcastsMain = podcasts
@@ -279,9 +254,6 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         super.viewDidAppear(false)
     }
 
-    
-    
-    
     func animateTable() {
         tableView.reloadData()
         let cells = tableView.visibleCells
@@ -303,5 +275,39 @@ class PodcastViewController: UITableViewController, UISearchBarDelegate, Authori
         
     }
     
+    //MARK: - check internet connection
+    func setReachabilityNotifire(){
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        }catch{
+            print("coul'd atart reachability notifire")
+        }
+    }
+    
+    @objc func reachabilityChanged(note: Notification){
+        let reachability = note.object as! Reachability
+        switch reachability.connection {
+        case .wifi:
+            print("wifi!!!!!!!!!!!!!!!")
+        case .cellular:
+            print("celular!!!!!!!!!!!!!!!")
+        case .none:
+            print("no!!!!!!!!!!!!!!!")
+            self.alert(message: "מצטערים, אין חיבור לאינטרנט", title: "Oops!")
+        }
+    }
+    
+}
+extension PodcastViewController{
+    func alert (message: String, title: String = ""){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "בסדר", style: .default, handler: nil)
+        alertController.addAction(okAction)
+
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
 }
 
