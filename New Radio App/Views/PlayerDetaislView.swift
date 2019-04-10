@@ -172,8 +172,10 @@ class PlayerDetaislView: UIView {
         let time = CMTimeMake(value: 1, timescale: 3)
         let times = [NSValue(time: time)]
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
+            self!.playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            self!.miniPlayPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             self?.enlargePodcastImageView()
-          self?.setupLockScreenDuration()
+            self?.setupLockScreenDuration()
         }
     }
     
@@ -316,7 +318,7 @@ fileprivate func setupInterruptionObserver(){
             
             //set time to currentTimeLabel
             self?.currentTimeLabel.text = time.toDisplayString()
-            
+           
             let duractionTime = self?.player.currentItem?.duration//get seconds and minutes
             self?.duractionLabel.text = duractionTime?.toDisplayString()
             
@@ -324,6 +326,7 @@ fileprivate func setupInterruptionObserver(){
         }
     }
     
+
     
     fileprivate func updateCurrentTimeSlider(){
         let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
